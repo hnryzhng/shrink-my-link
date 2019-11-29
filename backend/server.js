@@ -46,11 +46,14 @@ router.post("/shrink", (req, res) => {
 	// urlValidator(longUrl)
 
 	Urls.connect({ long-url: longUrl }).then((urlDoc) => {
+
+		const docId = urlDoc.id;
+
 		if (!urlDoc) {
 			// if not found in db
 
 			// shorten url with module
-			const shortUrl = null	// shrinker module 
+			const shortUrl = Shrinker.shrink(docId);	// shrinker module 
 			
 			// insert long url and shortened url as a doc in the db
 			urlDoc.long_url = longUrl;
@@ -90,17 +93,7 @@ router.post("/shrink", (req, res) => {
 	})
 	.catch( (err) => {
 		console.log("error connecting to db: ", err) 
-
-		const shortUrl = null	// shrinker module
-
-		const responseObj = {
-			success: true,
-			long_url: longUrl,
-			short_url: shortUrl
-		}
-
-		res.json(responseObj);
-
+		res.json({ success: false });
 	});
 
 
