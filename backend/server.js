@@ -4,7 +4,9 @@ const bodyParser = require("body-parser");
 const logger = require("morgan");
 const cors = require("cors");
 
-const Urls = require(".models/urls.js")
+const Urls = require("./models/urls.js");
+
+const shrinker = require("./shrinker.js");
 
 // INSTANTIATE APP 
 const app = express();
@@ -40,31 +42,70 @@ router.post("/shrink", (req, res) => {
 	const longUrl = req.body.longUrl;	// front-end param should be longUrl
 	console.log("long url:", longUrl);
 
+	// validate url
+	// urlValidator(longUrl)
+
 	Urls.connect({ long-url: longUrl }).then((urlDoc) => {
 		if (!urlDoc) {
+			// if not found in db
 
-			// if not found
 			// shorten url with module
+			const shortUrl = null	// shrinker module 
+			
 			// insert long url and shortened url as a doc in the db
+			urlDoc.long_url = longUrl;
+			urlDoc.short_url = shortUrl;
+
+			urlDoc
+				.save()
+				.then(console.log('url doc saved to db'))
+				.catch( err => console.log('could not save url doc to db'));
+
 			// send response obj with shortened url
+
+			const responseObj = {
+				success: true,
+				long_url: longUrl,
+				short_url: shortUrl
+			}
+
+			res.json(responseObj);
 
 			// alternative
 			// console.log("url doc not found in db");
 			// res.status(400).json({ error: "url not found" });
 			// return
 		} else {
-			// if found
+			// if found in db
+			const responseObj = {
+				success: true,
+				long_url: urlDoc.long_url;
+				short_url: urlDoc.short_url;
+			}
+
+			res.json(responseObj);
 
 		}
 
+	})
+	.catch( (err) => {
+		console.log("error connecting to db: ", err) 
 
+		const shortUrl = null	// shrinker module
 
+		const responseObj = {
+			success: true,
+			long_url: longUrl,
+			short_url: shortUrl
+		}
+
+		res.json(responseObj);
 
 	});
 
 
 
-})
+});
 
 
 
