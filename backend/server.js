@@ -45,9 +45,10 @@ router.post("/shrink", (req, res) => {
 	// validate url
 	// urlValidator(longUrl)
 
-	Urls.connect({ long-url: longUrl }).then((urlDoc) => {
+	Urls.connect({ long_url: longUrl }).then((urlDoc) => {
 
-		const docId = urlDoc.id;
+		const docId = urlDoc.id;	// or urlDoc._id
+		console.log("docId:", docId);
 
 		if (!urlDoc) {
 			// if not found in db
