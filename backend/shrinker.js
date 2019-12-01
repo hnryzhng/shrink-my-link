@@ -2,7 +2,7 @@
 
 var Shrinker = function() {};
 
-Shrinker.shrink = function(docId) => {
+Shrinker.shrink = function(docId) {
 
 	/**
 		- convert unique id counter of url doc into shortened url

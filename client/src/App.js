@@ -5,8 +5,33 @@ class App extends Component {
 
   state = {
   	urlInput: null,
-    links: [{long_url: "lol", short_url: "haha"}] // array of pairs/objects of long and short urls
+    links: [] // [{long_url: "", short_url: ""}, ...]
   }
+
+  sendUrl = (event) => {
+    event.preventDefault();
+
+    const urlInput = this.state.urlInput;
+    console.log("state urlInput:", this.state.urlInput);
+    
+    axios.post("http://localhost:3001/api/shrink", {
+            longUrl: urlInput
+          })
+          .then(response => response.data)
+          .then(data => {
+            if (data.success) {
+              // add long and short urls from response to links array
+              console.log("response data:", data);
+              this.state.links.push({long_url: data.long_url, short_url: data.short_url});
+            } else {
+              console.log("could not shrink your link");
+            }
+
+          })
+          .catch(error => console.log("processing error:", error));
+
+  }
+
 
   render() {
     
@@ -15,8 +40,10 @@ class App extends Component {
       <div>
         <h1> SHRINK MY LINK </h1>
 
-        <input type="text" style={{ width: "300px" }} placeholder="Shrink me!" name="originalUrl" onChange={ event => this.setState({ urlInput: event.target.value }) } />
-
+        <form onSubmit={ this.sendUrl }>
+          <input type="text" style={{ width: "300px" }} placeholder="Your URL!" name="originalurl" onChange={ event => this.setState({ urlInput: event.target.value }) } />
+          <button type="submit">SHRINK ME</button >
+        </form>
 
         <div id="listContainer" style={{ width: "300px", height: "500px", border: "1px solid black" }}>
           <List links={ this.state.links } />

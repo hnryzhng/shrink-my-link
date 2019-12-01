@@ -3,10 +3,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const cors = require("cors");
+const uuid = require("uuid-v4");
 
 const Urls = require("./models/urls.js");
 
-const shrinker = require("./shrinker.js");
+const Shrinker = require("./shrinker.js");
 
 // INSTANTIATE APP 
 const app = express();
@@ -42,27 +43,40 @@ router.post("/shrink", (req, res) => {
 	const longUrl = req.body.longUrl;	// front-end param should be longUrl
 	console.log("long url:", longUrl);
 
-	// validate url
+	// process url
+	// validate url 
 	// urlValidator(longUrl)
 
-	Urls.connect({ long_url: longUrl }).then((urlDoc) => {
+	// grab root url, then append encoded portion
 
-		const docId = urlDoc.id;	// or urlDoc._id
-		console.log("docId:", docId);
+	Urls.findOne({ long_url: longUrl }).then((urlDoc) => {
+
 
 		if (!urlDoc) {
 			// if not found in db
 
-			// shorten url with module
-			const shortUrl = Shrinker.shrink(docId);	// shrinker module 
-			
-			// insert long url and shortened url as a doc in the db
-			urlDoc.long_url = longUrl;
-			urlDoc.short_url = shortUrl;
+			// generate a locally unique id using UUID
+			const docId = uuid();
+			console.log("generated docId:", docId);
 
-			urlDoc
+			// shorten url with module
+			// BOOKMARK: since docId is a string, not an int, must find new way of shrinking/encoding long url
+			const shortUrl = Shrinker.shrink(docId);	// shrinker module 
+			console.log("shortUrl:", shortUrl);
+
+			// insert long url and shortened url as a doc in the db
+
+			const urlObj = {
+				doc_id: docId,
+				long_url: longUrl,
+				short_url: shortUrl
+			}
+
+			const urlRecord = new Urls(urlObj);
+		
+			urlRecord
 				.save()
-				.then(console.log('url doc saved to db'))
+				.then( urlRec => console.log('url doc saved to db', urlRec))
 				.catch( err => console.log('could not save url doc to db'));
 
 			// send response obj with shortened url
@@ -81,10 +95,14 @@ router.post("/shrink", (req, res) => {
 			// return
 		} else {
 			// if found in db
+			console.log("doc found in db:", urlDoc);
+			const docId = urlDoc.doc_id;
+			console.log("docId:", docId);
+
 			const responseObj = {
 				success: true,
-				long_url: urlDoc.long_url;
-				short_url: urlDoc.short_url;
+				long_url: urlDoc.long_url,
+				short_url: urlDoc.short_url
 			}
 
 			res.json(responseObj);
