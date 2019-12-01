@@ -8,6 +8,7 @@ const uuid = require("uuid-v4");
 const Urls = require("./models/urls.js");
 
 const Shrinker = require("./shrinker.js");
+const Counter = require("./counter.js")
 
 // INSTANTIATE APP 
 const app = express();
@@ -61,8 +62,14 @@ router.post("/shrink", (req, res) => {
 
 			// shorten url with module
 			// BOOKMARK: since docId is a string, not an int, must find new way of shrinking/encoding long url
+
+			// grab unique counter from Counter collection, have it encoded in Shrinker, then increment unique_counter by 1 and reinsert/save in Counter collection
+			// assign a tag to Counter doc for it to be easily found, like { unique_counter: int, tag: 'counter_tag'}?
+
 			const shortUrl = Shrinker.shrink(docId);	// shrinker module 
+
 			console.log("shortUrl:", shortUrl);
+
 
 			// insert long url and shortened url as a doc in the db
 
