@@ -6,9 +6,9 @@ const cors = require("cors");
 const uuid = require("uuid-v4");
 
 const Urls = require("./models/urls.js");
+const Counter = require("./models/counter.js")
 
 const Shrinker = require("./shrinker.js");
-const Counter = require("./counter.js")
 
 // INSTANTIATE APP 
 const app = express();
@@ -44,67 +44,90 @@ router.post("/shrink", (req, res) => {
 	const longUrl = req.body.longUrl;	// front-end param should be longUrl
 	console.log("long url:", longUrl);
 
+	// TASK
 	// process url
 	// validate url 
 	// urlValidator(longUrl)
+
+	// TASK
+	// process list of over a thousand urls so I get the interesting looking short urls
 
 	// grab root url, then append encoded portion
 
 	Urls.findOne({ long_url: longUrl }).then((urlDoc) => {
 
+		/**
+
+		grab unique counter from Counter collection, 
+		have it encoded in Shrinker, 
+		increment unique_counter by 1 
+		reinsert/save in Counter collection			
+		
+		**/
 
 		if (!urlDoc) {
 			// if not found in db
 
-			// generate a locally unique id using UUID
-			const docId = uuid();
-			console.log("generated docId:", docId);
+			Counter.findOne({ universal_counter: true }).then((counterDoc) => {
+				
+				if (!counterDoc) {
+					// if doesn't exist, then create and insert it
 
-			// shorten url with module
-			// BOOKMARK: since docId is a string, not an int, must find new way of shrinking/encoding long url
+					const counterObj = {
+						unique_counter: 0
+					}
 
-			// grab unique counter from Counter collection, have it encoded in Shrinker, then increment unique_counter by 1 and reinsert/save in Counter collection
-			// assign a tag to Counter doc for it to be easily found, like { unique_counter: int, tag: 'counter_tag'}?
+					const counterRecord = new Counter(counterObj)
+					counterDoc = counterRecord;
+				}
 
-			const shortUrl = Shrinker.shrink(docId);	// shrinker module 
+				counterDoc.unique_counter += 1;
+				const docId = counterDoc.unique_counter;
+				console.log("Counter Doc incremented unique counter:", counterDoc.unique_counter);
+				console.log("docId:", docId);
 
-			console.log("shortUrl:", shortUrl);
+				const shortUrl = Shrinker.shrink(docId);	// provided shortened url given unique counter 
+				console.log("shortUrl:", shortUrl);
+
+				// TASK
+				// append short url to root url (use path module?)
+
+				// counterDoc is either inserted or reinserted
+				counterDoc
+					.save()
+					.then( counterRec => console.log('counter doc inserted into db', counterRec))
+					.catch( err => console.log('could not save counter doc to db'));
+
+				// insert long url and shortened url as a doc in the db
+				const urlObj = {
+					doc_id: docId,
+					long_url: longUrl,
+					short_url: shortUrl
+				}
+
+				const urlRecord = new Urls(urlObj);
+			
+				urlRecord
+					.save()
+					.then( urlRec => console.log('url doc saved to db', urlRec))
+					.catch( err => console.log('could not save url doc to db'));
 
 
-			// insert long url and shortened url as a doc in the db
+				// send response obj with payload 
 
-			const urlObj = {
-				doc_id: docId,
-				long_url: longUrl,
-				short_url: shortUrl
-			}
+				const responseObj = {
+					success: true,
+					long_url: longUrl,
+					short_url: shortUrl
+				}
 
-			const urlRecord = new Urls(urlObj);
-		
-			urlRecord
-				.save()
-				.then( urlRec => console.log('url doc saved to db', urlRec))
-				.catch( err => console.log('could not save url doc to db'));
+				res.json(responseObj);
 
-			// send response obj with shortened url
-
-			const responseObj = {
-				success: true,
-				long_url: longUrl,
-				short_url: shortUrl
-			}
-
-			res.json(responseObj);
-
-			// alternative
-			// console.log("url doc not found in db");
-			// res.status(400).json({ error: "url not found" });
-			// return
+			})
+			.catch( (err) => console.log('error finding Counter doc in db', err));
 		} else {
 			// if found in db
 			console.log("doc found in db:", urlDoc);
-			const docId = urlDoc.doc_id;
-			console.log("docId:", docId);
 
 			const responseObj = {
 				success: true,
@@ -118,7 +141,7 @@ router.post("/shrink", (req, res) => {
 
 	})
 	.catch( (err) => {
-		console.log("error connecting to db: ", err) 
+		console.log("error finding Urls doc in db: ", err) 
 		res.json({ success: false });
 	});
 

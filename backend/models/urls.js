@@ -3,9 +3,15 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const urlSchema = new Schema(
 	{
-		doc_id: String,
-		long_url: String,
-		short_url: String
+		doc_id: {
+			type: String
+		},
+		long_url: {
+			type: String
+		},
+		short_url: { 
+			type: String 
+		}
 	},
 	{ timestamps: true }
 );
