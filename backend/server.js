@@ -36,6 +36,12 @@ mongoose
 
 // ROUTES
 
+
+
+// @route POST api/shrink
+// @desc Shorten url from user input  
+// @access Public
+
 // main route: 
 // check if url is already in db upon sending request
 // if not, shorten url, insert in db, then send response obj with shortened url
@@ -86,11 +92,8 @@ router.post("/shrink", (req, res) => {
 				console.log("Counter Doc incremented unique counter:", counterDoc.unique_counter);
 				console.log("docId:", docId);
 
-				const shortUrl = Shrinker.shrink(docId);	// provided shortened url given unique counter 
+				const shortUrl = Shrinker.shrink(docId);	// provided encoded short url given unique counter 
 				console.log("shortUrl:", shortUrl);
-
-				// TASK
-				// append short url to root url (use path module?)
 
 				// counterDoc is either inserted or reinserted
 				counterDoc
@@ -146,9 +149,24 @@ router.post("/shrink", (req, res) => {
 	});
 
 
-
 });
 
+// @route POST api/:shorturl
+// @desc Redirect to short url 
+// @access Public
+
+router.get("/:shorturl", (req, res) => {
+	// retrieve short url and redirect if in db
+
+	Urls.findOne({ short_url: shorturl}).then((urlDoc) => {
+		// if not in db
+
+
+		// ```${req.protocol}://${req.host}/${short_url}````
+
+	})
+
+});
 
 
 
