@@ -159,6 +159,8 @@ router.post("/shrink", (req, res) => {
 router.get("/:shorturl", (req, res) => {
 	// retrieve short url and redirect if in db
 
+	// TASK: see if redirect works once deployed in production
+
 	const shortUrl = req.params["shorturl"];
 	console.log("redirect route short url param:", shortUrl);
 
