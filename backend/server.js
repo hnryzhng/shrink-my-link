@@ -47,6 +47,7 @@ mongoose
 // if not, shorten url, insert in db, then send response obj with shortened url
 // else, retrieve shortened url from db and send response obj with shortened url 
 router.post("/shrink", (req, res) => {
+
 	const longUrl = req.body.longUrl;	// front-end param should be longUrl
 	console.log("long url:", longUrl);
 
@@ -121,7 +122,7 @@ router.post("/shrink", (req, res) => {
 				const responseObj = {
 					success: true,
 					long_url: longUrl,
-					short_url: shortUrl
+					full_short_url: req.protocol + '://' + req.hostname + '/' + shortUrl
 				}
 
 				res.json(responseObj);
@@ -152,18 +153,25 @@ router.post("/shrink", (req, res) => {
 });
 
 // @route POST api/:shorturl
-// @desc Redirect to short url 
+// @desc Redirect to long url 
 // @access Public
 
 router.get("/:shorturl", (req, res) => {
 	// retrieve short url and redirect if in db
 
-	Urls.findOne({ short_url: shorturl}).then((urlDoc) => {
-		// if not in db
+	const shortUrl = req.params["shorturl"];
+	console.log("redirect route short url param:", shortUrl);
 
-
-		// ```${req.protocol}://${req.host}/${short_url}````
-
+	Urls.findOne({ short_url: shortUrl }).then((urlDoc) => {
+		if (!urlDoc) {
+			res.json({
+				success: false,
+				error: "url could not be found"
+			})
+		} else {
+			console.log("redirect route long url:", urlDoc.long_url);
+			res.redirect(urlDoc.long_url);
+		}
 	})
 
 });

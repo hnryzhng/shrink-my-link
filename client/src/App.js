@@ -5,7 +5,7 @@ class App extends Component {
 
   state = {
   	urlInput: null,
-    links: [] // [{long_url: "", short_url: ""}, ...]
+    links: [] // [{long_url: "", full_short_url: ""}, ...]
   }
 
   sendUrl = (event) => {
@@ -22,7 +22,7 @@ class App extends Component {
             if (data.success) {
               // add long and short urls from response to links array
               console.log("response data:", data);
-              this.state.links.push({long_url: data.long_url, short_url: data.short_url});
+              this.setState( { links: [...this.state.links, {long_url: data.long_url, full_short_url: data.full_short_url}] } );
             } else {
               console.log("could not shrink your link");
             }
@@ -41,7 +41,7 @@ class App extends Component {
         <h1> SHRINK MY LINK </h1>
 
         <form onSubmit={ this.sendUrl }>
-          <input type="text" style={{ width: "300px" }} placeholder="Your URL!" name="originalurl" onChange={ event => this.setState({ urlInput: event.target.value }) } />
+          <input type="text" style={{ width: "300px" }} placeholder="Your URL!" name="longUrl" onChange={ event => this.setState({ urlInput: event.target.value }) } />
           <button type="submit">SHRINK ME</button >
         </form>
 
@@ -58,7 +58,6 @@ class List extends Component {
 
   render() {
     let list = this.props.links.map((urlObj, index) => {
-      console.log("index, urlObj:", index, urlObj)
       return <Item key={index} urlObj={urlObj} />
     });
 
@@ -73,10 +72,13 @@ class Item extends Component {
   render() {
 
     const urlObj = this.props.urlObj;
+    const longUrl = urlObj.long_url;
+    const fullShortUrl = urlObj.full_short_url;
 
     return(
       <div>
-        <li long_url={ urlObj.long_url } short_url={ urlObj.short_url } ></li>    
+        <li long_url={ longUrl } full_short_url={ fullShortUrl } ></li> 
+        long url: { longUrl } ||| shortened url: {fullShortUrl}
       </div>
     )
 
