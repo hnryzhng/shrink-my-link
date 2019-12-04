@@ -38,8 +38,6 @@ mongoose
 
 // ROUTES
 
-
-
 // @route POST api/shrink
 // @desc Shorten url from user input  
 // @access Public
