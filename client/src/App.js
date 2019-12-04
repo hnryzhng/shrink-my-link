@@ -5,7 +5,8 @@ class App extends Component {
 
   state = {
   	urlInput: null,
-    links: [] // [{long_url: "", full_short_url: ""}, ...]
+    links: [], // [{long_url: "", full_short_url: ""}, ...]
+    error: null
   }
 
   sendUrl = (event) => {
@@ -23,8 +24,9 @@ class App extends Component {
               // add long and short urls from response to links array
               console.log("response data:", data);
               this.setState( { links: [...this.state.links, {long_url: data.long_url, full_short_url: data.full_short_url}] } );
-            } else {
+            } else {      
               console.log("could not shrink your link");
+              this.setState({ error: data.error })  // sets error message 
             }
 
           })
@@ -44,6 +46,10 @@ class App extends Component {
           <input type="text" style={{ width: "300px" }} placeholder="Your URL!" name="longUrl" onChange={ event => this.setState({ urlInput: event.target.value }) } />
           <button type="submit">SHRINK ME</button >
         </form>
+
+        <div id="error-container" style={{ width: "300px" }} >
+          Err Message: {this.state.error}
+        </div>
 
         <div id="listContainer" style={{ width: "300px", height: "500px", border: "1px solid black" }}>
           <List links={ this.state.links } />

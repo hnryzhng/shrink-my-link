@@ -5,6 +5,8 @@ const logger = require("morgan");
 const cors = require("cors");
 const uuid = require("uuid-v4");
 
+var validator = require("validator");
+
 const Urls = require("./models/urls.js");
 const Counter = require("./models/counter.js")
 
@@ -48,18 +50,20 @@ mongoose
 // else, retrieve shortened url from db and send response obj with shortened url 
 router.post("/shrink", (req, res) => {
 
+	// TASK
+	// test: process list of over a thousand urls so I get the interesting looking short urls
+
 	const longUrl = req.body.longUrl;	// front-end param should be longUrl
 	console.log("long url:", longUrl);
 
-	// TASK
-	// process url
-	// validate url 
-	// urlValidator(longUrl)
+	// if not valid url
+	if (!validator.isURL(longUrl)) {
+		res.json({
+			success: false,
+			error: "Not a valid url"
+		})
+	}
 
-	// TASK
-	// process list of over a thousand urls so I get the interesting looking short urls
-
-	// grab root url, then append encoded portion
 
 	Urls.findOne({ long_url: longUrl }).then((urlDoc) => {
 
@@ -103,13 +107,13 @@ router.post("/shrink", (req, res) => {
 					.catch( err => console.log('could not save counter doc to db'));
 
 				// insert long url and shortened url as a doc in the db
-				const urlObj = {
+				const urlResponse = {
 					doc_id: docId,
 					long_url: longUrl,
 					short_url: shortUrl
 				}
 
-				const urlRecord = new Urls(urlObj);
+				const urlRecord = new Urls(urlResponse);
 			
 				urlRecord
 					.save()
@@ -168,7 +172,7 @@ router.get("/:shorturl", (req, res) => {
 		if (!urlDoc) {
 			res.json({
 				success: false,
-				error: "url could not be found"
+				error: "Url could not be found"
 			})
 		} else {
 			console.log("redirect route long url:", urlDoc.long_url);
