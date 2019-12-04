@@ -38,6 +38,10 @@ mongoose
 
 // ROUTES
 
+// TASK
+// modularize routes: http://catlau.co/how-to-modularize-routes-with-the-express-router/
+
+
 // @route POST api/shrink
 // @desc Shorten url from user input  
 // @access Public
@@ -162,8 +166,9 @@ router.get("/:shorturl", (req, res) => {
 	// retrieve short url and redirect if in db
 
 	// TASK: see if redirect works once deployed in production
+	// troubleshoot "redirect with react js express js"
 
-	const shortUrl = req.params["shorturl"];
+	const shortUrl = req.params.shorturl;
 	console.log("redirect route short url param:", shortUrl);
 
 	Urls.findOne({ short_url: shortUrl }).then((urlDoc) => {
