@@ -41,6 +41,12 @@ mongoose
 // TASK
 // modularize routes: http://catlau.co/how-to-modularize-routes-with-the-express-router/
 
+// TASK
+// Testing
+// Unit testing with Mocha, Chai: https://codeburst.io/javascript-unit-testing-using-mocha-and-chai-1d97d9f18e71
+// More: https://mherman.org/blog/testing-node-js-with-mocha-and-chai/
+// React testing: https://medium.com/@houstoncbreedlove/basics-intro-to-testing-react-components-with-mocha-chai-enzyme-and-sinon-c8b82ce58df8
+
 
 // @route POST api/shrink
 // @desc Shorten url from user input  
@@ -162,15 +168,17 @@ router.post("/shrink", (req, res) => {
 // @desc Redirect to long url 
 // @access Public
 
-router.get("/:shorturl", (req, res) => {
+app.get("/:shorturl", (req, res) => {
 	// retrieve short url and redirect if in db
+	
+	// use app.get() instead of router.get() so I don't have to include '/api' in request
 
 	// TASK: see if redirect works once deployed in production
 	// troubleshoot "redirect with react js express js"
 
 	const shortUrl = req.params.shorturl;
 	console.log("redirect route short url param:", shortUrl);
-
+	/*
 	Urls.findOne({ short_url: shortUrl }).then((urlDoc) => {
 		if (!urlDoc) {
 			res.json({
@@ -179,13 +187,14 @@ router.get("/:shorturl", (req, res) => {
 			})
 		} else {
 			console.log("redirect route long url:", urlDoc.long_url);
-			res.redirect(urlDoc.long_url);
+			res.status(301).redirect('https://' + urlDoc.long_url + '/');
 		}
 	})
+	*/
 
 });
 
 
 
-app.use("/api", router);	// allows react to send api request using "api" in request URL
+app.use("/api", router);	// allows react to send api request using "api" in request URL by appending it to routes with Router
 app.listen(api_port, () => console.log(`Listening to ${api_port}`));
