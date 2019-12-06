@@ -38,14 +38,20 @@ mongoose
 
 // ROUTES
 
+
 // TASK
-// modularize routes: http://catlau.co/how-to-modularize-routes-with-the-express-router/
+// Deploy to Heroky to test redirect
 
 // TASK
 // Testing
 // Unit testing with Mocha, Chai: https://codeburst.io/javascript-unit-testing-using-mocha-and-chai-1d97d9f18e71
-// More: https://mherman.org/blog/testing-node-js-with-mocha-and-chai/
+// Chai assertion methods: https://www.chaijs.com/guide/styles/
+// Testing requests with Chai HTTP: https://mherman.org/blog/testing-node-js-with-mocha-and-chai/
 // React testing: https://medium.com/@houstoncbreedlove/basics-intro-to-testing-react-components-with-mocha-chai-enzyme-and-sinon-c8b82ce58df8
+
+// TASK
+// modularize routes: http://catlau.co/how-to-modularize-routes-with-the-express-router/
+
 
 
 // @route POST api/shrink
