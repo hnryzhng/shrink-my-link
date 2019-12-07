@@ -41,6 +41,8 @@ mongoose
 
 // TASK
 // Deploy to Heroky to test redirect
+// https://medium.com/@basics.aki/deploy-a-mern-stack-application-to-heroku-b9a98b569469
+// https://www.youtube.com/watch?v=71wSzpLyW9k
 
 // TASK
 // Testing
