@@ -5,7 +5,7 @@ const logger = require("morgan");
 const cors = require("cors");
 const uuid = require("uuid-v4");
 
-var validator = require("validator");
+const validator = require("validator");
 
 const Urls = require("./models/urls.js");
 const Counter = require("./models/counter.js")
@@ -46,6 +46,7 @@ mongoose
 
 // TASK
 // Testing
+// Testing framework with Mocha: https://blog.logrocket.com/a-quick-and-complete-guide-to-mocha-testing-d0e0ea09f09d/
 // Unit testing with Mocha, Chai: https://codeburst.io/javascript-unit-testing-using-mocha-and-chai-1d97d9f18e71
 // Chai assertion methods: https://www.chaijs.com/guide/styles/
 // Testing requests with Chai HTTP: https://mherman.org/blog/testing-node-js-with-mocha-and-chai/
@@ -53,6 +54,22 @@ mongoose
 
 // TASK
 // modularize routes: http://catlau.co/how-to-modularize-routes-with-the-express-router/
+
+// @route GET /test-route
+// @desc testing test package
+// @access Public
+app.get('/test-route', (req, res) => {
+
+	const jsonObj = {
+		success: true,
+		name: 'hi'
+	}
+
+	res.json(jsonObj);
+
+
+});
+
 
 
 
@@ -205,4 +222,4 @@ app.get("/:shorturl", (req, res) => {
 
 
 app.use("/api", router);	// allows react to send api request using "api" in request URL by appending it to routes with Router
-app.listen(api_port, () => console.log(`Listening to ${api_port}`));
+module.exports = app.listen(api_port, () => console.log(`Listening to ${api_port}`));

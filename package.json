@@ -4,12 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"cd backend && node server.js\" \"cd client && npm start\""
+    "start": "concurrently \"cd backend && node server.js\" \"cd client && npm start\"",
+    "test": "mocha"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "concurrently": "^5.0.0"
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "concurrently": "^5.0.0",
+    "mocha": "^6.2.2",
+    "mongoose": "^5.8.0"
   }
 }
