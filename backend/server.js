@@ -45,12 +45,7 @@ mongoose
 // https://www.youtube.com/watch?v=71wSzpLyW9k
 
 // TASK
-// Testing
-// Testing framework with Mocha: https://blog.logrocket.com/a-quick-and-complete-guide-to-mocha-testing-d0e0ea09f09d/
-// Unit testing with Mocha, Chai: https://codeburst.io/javascript-unit-testing-using-mocha-and-chai-1d97d9f18e71
-// Chai assertion methods: https://www.chaijs.com/guide/styles/
-// Testing requests with Chai HTTP: https://mherman.org/blog/testing-node-js-with-mocha-and-chai/
-// React testing: https://medium.com/@houstoncbreedlove/basics-intro-to-testing-react-components-with-mocha-chai-enzyme-and-sinon-c8b82ce58df8
+// TESTING
 
 // TASK
 // modularize routes: http://catlau.co/how-to-modularize-routes-with-the-express-router/
@@ -118,14 +113,14 @@ router.post("/shrink", (req, res) => {
 					// if doesn't exist, then create and insert it
 
 					const counterObj = {
-						unique_counter: 0
+						unique_counter: 1
 					}
 
 					const counterRecord = new Counter(counterObj)
 					counterDoc = counterRecord;
 				}
 
-				counterDoc.unique_counter += 1;
+				counterDoc.unique_counter += 1;	// unique counter starts at 2, while test unique counter starts at 1
 				const docId = counterDoc.unique_counter;
 				console.log("Counter Doc incremented unique counter:", counterDoc.unique_counter);
 				console.log("docId:", docId);

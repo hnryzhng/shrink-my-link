@@ -23,8 +23,8 @@ Shrinker.shrink = function(docId) {
 	// loop to convert base 10 number into base 58 string
     while (num) {
         var charIndex = num % base;	// remainder for index of char (maps digit to character position)
-        num = Math.floor( num / base );	// divide num by base for further loop processing
         encodedStr += characters[charIndex].toString();	// add encoded char to encodedStr string
+        num = Math.floor( num / base );	// divide num by base for further loop processing
     }
 
     // console.log('encodedStr:', encodedStr);
