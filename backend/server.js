@@ -60,8 +60,8 @@ mongoose
 // change port from just 3001 to app.listen(process.env.PORT || 3001)
 
 // deploy MongoDB cloud to Heroku: 
-// https://devcenter.heroku.com/articles/mongolab#connecting-to-existing-mlab-deployments-from-heroku
 // https://www.freecodecamp.org/forum/t/how-to-deploy-your-mongodb-app-to-heroku/19347
+// https://devcenter.heroku.com/articles/mongolab#connecting-to-existing-mlab-deployments-from-heroku
 // use environment variables for sensitive urls like MongoURI
 // - hide config key.js maybe remove from github; set environment variable MONGOLAB_URI="<db cloud url>"; refer to process.env.MONGOLAB_URI in server.js; set env var for MONGOLAB_URI in Heroku like so $heroku config:set MONGOLAB_URI="<db cloud url>"
 
@@ -77,6 +77,9 @@ mongoose
 
 // TASK
 // modularize routes: http://catlau.co/how-to-modularize-routes-with-the-express-router/
+
+// TASK 
+// creating backups of db
 
 // @route POST api/shrink
 // @desc Shorten url from user input  
