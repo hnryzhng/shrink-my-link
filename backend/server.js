@@ -8,10 +8,11 @@ const path = require("path");
 
 const validator = require("validator");
 
-const Urls = require("./models/urls.js");
-const Counter = require("./models/counter.js")
+const Urls = require(path.join(__dirname + "./models/urls.js"));
+const Counter = require(path.join(__dirname + "./models/counter.js");
 
-const Shrinker = require("./shrinker.js");
+const Shrinker = require(path.join(__dirname + "./shrinker.js");
+const pingHeroku = require(path.join(__dirname + '/ping-heroku.js'));
 
 // INSTANTIATE APP 
 const app = express();
@@ -22,6 +23,9 @@ const api_port = 3001;
 app.use(bodyParser.urlencoded({ extended:true }));
 app.use(bodyParser.json());
 app.use(cors());
+
+// HEROKU
+pingHeroku("https://hospital-cost-map.herokuapp.com/", 900000); // pings every 900 seconds, or 15 minutes
 
 // REACT
 // references front-end React for use in Heroku deployment, instead of locally running front-end and back-end with $npm start 
