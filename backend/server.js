@@ -36,7 +36,7 @@ app.get("*", (req, res) => {
 
 // DATABASE
 // const dbRoute = require("./config/keys.js").mongoURI;	// cloud db url stored in config file
-const dbRoute = process.env.MONGO_URI;
+const dbRoute = process.env.MONGO_URI.toString();
 mongoose
 	.connect(
 		dbRoute,
