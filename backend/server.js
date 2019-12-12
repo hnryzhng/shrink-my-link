@@ -62,6 +62,7 @@ mongoose
 // https://devcenter.heroku.com/articles/mongolab#connecting-to-existing-mlab-deployments-from-heroku
 // https://www.freecodecamp.org/forum/t/how-to-deploy-your-mongodb-app-to-heroku/19347
 // use environment variables for sensitive urls like MongoURI
+// - hide config key.js maybe remove from github; set environment variable MONGOLAB_URI="<db cloud url>"; refer to process.env.MONGOLAB_URI in server.js; set env var for MONGOLAB_URI in Heroku like so $heroku config:set MONGOLAB_URI="<db cloud url>"
 
 
 
@@ -225,4 +226,4 @@ app.get("/:shorturl", (req, res) => {
 
 
 app.use("/api", router);	// allows react to send api request using "api" in request URL by appending it to routes with Router
-module.exports = app.listen(process.env.PORT || api_port, () => console.log(`Listening to ${api_port}`) |);
+module.exports = app.listen(process.env.PORT || api_port, () => console.log(`Listening to ${api_port}`) );
