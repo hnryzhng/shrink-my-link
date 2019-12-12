@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"cd backend && node server.js\" \"cd client && npm start\"",
+    "start": "cd backend && npm install && node server.js", // serves backend file with reference to react after deployment in Heroku
+    "heroku-postbuild": "cd client && npm install && npm run build",  // installs front end and runs build for react scripts post deployment in Heroku
+    "local": "concurrently \"cd backend && node server.js\" \"cd client && npm start\"",
     "test": "mocha"
   },
   "keywords": [],

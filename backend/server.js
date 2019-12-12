@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const logger = require("morgan");
 const cors = require("cors");
 const uuid = require("uuid-v4");
+const path = require("path");
 
 const validator = require("validator");
 
@@ -21,6 +22,13 @@ const api_port = 3001;
 app.use(bodyParser.urlencoded({ extended:true }));
 app.use(bodyParser.json());
 app.use(cors());
+
+// REACT
+// references front-end React for use in Heroku deployment, instead of locally running front-end and back-end with $npm start 
+app.use(express.static(path.join(__dirname,"../client/build")));	
+app.get("*", (req, res) => {
+	res.sendFile(path.join(__dirname+"../client/build/index.html"));
+});
 
 // DATABASE
 const dbRoute = require("./config/keys.js").mongoURI;	// cloud db url stored in config file
@@ -49,24 +57,6 @@ mongoose
 
 // TASK
 // modularize routes: http://catlau.co/how-to-modularize-routes-with-the-express-router/
-
-// @route GET /test-route
-// @desc testing test package
-// @access Public
-app.get('/test-route', (req, res) => {
-
-	const jsonObj = {
-		success: true,
-		name: 'hi'
-	}
-
-	res.json(jsonObj);
-
-
-});
-
-
-
 
 // @route POST api/shrink
 // @desc Shorten url from user input  
