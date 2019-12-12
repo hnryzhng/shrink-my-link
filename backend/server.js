@@ -8,10 +8,10 @@ const path = require("path");
 
 const validator = require("validator");
 
-const Urls = require(path.join(__dirname + "./models/urls.js"));
-const Counter = require(path.join(__dirname + "./models/counter.js");
+const Urls = require(path.join(__dirname + "/models/urls.js"));
+const Counter = require(path.join(__dirname + "/models/counter.js"));
 
-const Shrinker = require(path.join(__dirname + "./shrinker.js");
+const Shrinker = require(path.join(__dirname + "/shrinker.js"));
 const pingHeroku = require(path.join(__dirname + '/ping-heroku.js'));
 
 // INSTANTIATE APP 
@@ -48,17 +48,20 @@ mongoose
 
 
 
-// ROUTES
-
-
 // TASK
 // Deploy to Heroku to test redirect
 // https://medium.com/@basics.aki/deploy-a-mern-stack-application-to-heroku-b9a98b569469
-// https://www.youtube.com/watch?v=71wSzpLyW9k
-// add to boilerplate deploying to heroku with node: install heroku; heroku create; git push herokuappname master; heroku buildpacks:set heroku/nodejs; check deployment with heroku ps:scale web=1; heroku open
+// add to boilerplate: basic deploy to heroku with node: install heroku; heroku create; git push herokuappname master; heroku buildpacks:set heroku/nodejs; check deployment with heroku ps:scale web=1; heroku open
+// add to boilerplate: modify root's package.json so scripts=>start ($npm start) serves backend with refs to react, scripts=> heroku-postbuild ($npm run-script heroku-postbuild) installs frontend after deployment
+// can run local build by changing to another script, like script=> local ($npm run-script local)
 
 // TASK
 // TESTING
+// add to boilerplate
+
+
+// ROUTES
+// add to boilerplate
 
 // TASK
 // modularize routes: http://catlau.co/how-to-modularize-routes-with-the-express-router/
