@@ -35,7 +35,8 @@ app.get("*", (req, res) => {
 });
 
 // DATABASE
-const dbRoute = require("./config/keys.js").mongoURI;	// cloud db url stored in config file
+// const dbRoute = require("./config/keys.js").mongoURI;	// cloud db url stored in config file
+const dbRoute = process.env.MONGO_URI;
 mongoose
 	.connect(
 		dbRoute,
@@ -55,11 +56,18 @@ mongoose
 // add to boilerplate: modify root's package.json so scripts=>start ($npm start) serves backend with refs to react, scripts=> heroku-postbuild ($npm run-script heroku-postbuild) installs frontend after deployment
 // can run local build by changing to another script, like script=> local ($npm run-script local)
 // change path references by requiring path, then path.join(__dirname + "/<moduledir>")
-// change port from just 3000 to app.listen(process.env.PORT || 3000)
+// change port from just 3001 to app.listen(process.env.PORT || 3001)
+
+// deploy MongoDB cloud to Heroku: 
+// https://devcenter.heroku.com/articles/mongolab#connecting-to-existing-mlab-deployments-from-heroku
+// https://www.freecodecamp.org/forum/t/how-to-deploy-your-mongodb-app-to-heroku/19347
+// use environment variables for sensitive urls like MongoURI
+
+
 
 // TASK
 // TESTING
-// add to boilerplate
+// add tutorials and code to boilerplate
 
 
 // ROUTES
