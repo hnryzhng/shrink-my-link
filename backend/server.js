@@ -55,6 +55,7 @@ mongoose
 // Deploy to Heroku to test redirect
 // https://medium.com/@basics.aki/deploy-a-mern-stack-application-to-heroku-b9a98b569469
 // https://www.youtube.com/watch?v=71wSzpLyW9k
+// add to boilerplate deploying to heroku with node: install heroku; heroku create; git push herokuappname master; heroku buildpacks:set heroku/nodejs; check deployment with heroku ps:scale web=1; heroku open
 
 // TASK
 // TESTING
