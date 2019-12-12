@@ -54,6 +54,8 @@ mongoose
 // add to boilerplate: basic deploy to heroku with node: install heroku; heroku create; git push herokuappname master; heroku buildpacks:set heroku/nodejs; check deployment with heroku ps:scale web=1; heroku open
 // add to boilerplate: modify root's package.json so scripts=>start ($npm start) serves backend with refs to react, scripts=> heroku-postbuild ($npm run-script heroku-postbuild) installs frontend after deployment
 // can run local build by changing to another script, like script=> local ($npm run-script local)
+// change path references by requiring path, then path.join(__dirname + "/<moduledir>")
+// change port from just 3000 to app.listen(process.env.PORT || 3000)
 
 // TASK
 // TESTING
@@ -215,4 +217,4 @@ app.get("/:shorturl", (req, res) => {
 
 
 app.use("/api", router);	// allows react to send api request using "api" in request URL by appending it to routes with Router
-module.exports = app.listen(api_port, () => console.log(`Listening to ${api_port}`));
+module.exports = app.listen(process.env.PORT || api_port, () => console.log(`Listening to ${api_port}`) |);
