@@ -65,7 +65,6 @@ mongoose
 // creating backups of db
 
 
-
 // @route POST api/shrink
 // @desc Shorten url from user input  
 // @access Public
@@ -196,7 +195,7 @@ app.get("/:shorturl", (req, res) => {
 
 	const shortUrl = req.params.shorturl;
 	console.log("redirect route short url param:", shortUrl);
-	/*
+	
 	Urls.findOne({ short_url: shortUrl }).then((urlDoc) => {
 		if (!urlDoc) {
 			res.json({
@@ -205,10 +204,9 @@ app.get("/:shorturl", (req, res) => {
 			})
 		} else {
 			console.log("redirect route long url:", urlDoc.long_url);
-			res.status(301).redirect('https://' + urlDoc.long_url + '/');
+			res.status(301).redirect(urlDoc.long_url);
 		}
 	})
-	*/
 
 });
 
