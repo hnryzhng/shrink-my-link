@@ -49,21 +49,6 @@ mongoose
 
 
 
-// TASK
-// Deploy to Heroku to test redirect
-// https://medium.com/@basics.aki/deploy-a-mern-stack-application-to-heroku-b9a98b569469
-// add to boilerplate: basic deploy to heroku with node: install heroku; heroku create; git push herokuappname master; heroku buildpacks:set heroku/nodejs; check deployment with heroku ps:scale web=1; heroku open
-// add to boilerplate: modify root's package.json so scripts=>start ($npm start) serves backend with refs to react, scripts=> heroku-postbuild ($npm run-script heroku-postbuild) installs frontend after deployment
-// can run local build by changing to another script, like script=> local ($npm run-script local)
-// change path references by requiring path, then path.join(__dirname + "/<moduledir>")
-// change port from just app.listen(3001) to app.listen(process.env.PORT || 3001)
-
-// deploy MongoDB cloud to Heroku: 
-// https://www.freecodecamp.org/forum/t/how-to-deploy-your-mongodb-app-to-heroku/19347
-// https://devcenter.heroku.com/articles/mongolab#connecting-to-existing-mlab-deployments-from-heroku
-// use environment variables for sensitive urls like MongoURI
-// hide config key.js maybe remove from github; set environment variable MONGOLAB_URI="<db cloud url>"; refer to process.env.MONGOLAB_URI in server.js; set env var for MONGOLAB_URI in Heroku like so $heroku config:set MONGOLAB_URI="<db cloud url>"
-// allow access to MongoDB cloud from anywhere (e.g., whitelist IP)
 
 
 // TASK
@@ -71,14 +56,15 @@ mongoose
 // add tutorials and code to boilerplate
 
 
+// TASK
 // ROUTES
 // add to boilerplate
-
-// TASK
 // modularize routes: http://catlau.co/how-to-modularize-routes-with-the-express-router/
 
 // TASK 
 // creating backups of db
+
+
 
 // @route POST api/shrink
 // @desc Shorten url from user input  
