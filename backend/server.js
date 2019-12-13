@@ -33,8 +33,8 @@ app.get("*", (req, res) => {
 	res.sendFile(path.join(__dirname+"../client/public/index.html"));
 });
 
-// DATABASE
-// const dbRoute = require("./config/keys.js").mongoURI;	// cloud db url stored in config file
+// DATABASE 
+// const dbRoute = require(path.join(__dirname + "./config/keys.js").mongoURI;	// cloud db url stored in config file
 const dbRoute = process.env.MONGOLAB_URI;
 console.log("db route:", dbRoute);
 mongoose
@@ -63,6 +63,9 @@ mongoose
 
 // TASK 
 // creating backups of db
+
+// TASK
+// UPDATE MERN BOILERPLATE
 
 
 // @route POST api/shrink
