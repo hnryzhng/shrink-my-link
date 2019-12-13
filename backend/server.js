@@ -56,13 +56,13 @@ mongoose
 // add to boilerplate: modify root's package.json so scripts=>start ($npm start) serves backend with refs to react, scripts=> heroku-postbuild ($npm run-script heroku-postbuild) installs frontend after deployment
 // can run local build by changing to another script, like script=> local ($npm run-script local)
 // change path references by requiring path, then path.join(__dirname + "/<moduledir>")
-// change port from just 3001 to app.listen(process.env.PORT || 3001)
+// change port from just app.listen(3001) to app.listen(process.env.PORT || 3001)
 
 // deploy MongoDB cloud to Heroku: 
 // https://www.freecodecamp.org/forum/t/how-to-deploy-your-mongodb-app-to-heroku/19347
 // https://devcenter.heroku.com/articles/mongolab#connecting-to-existing-mlab-deployments-from-heroku
 // use environment variables for sensitive urls like MongoURI
-// - hide config key.js maybe remove from github; set environment variable MONGOLAB_URI="<db cloud url>"; refer to process.env.MONGOLAB_URI in server.js; set env var for MONGOLAB_URI in Heroku like so $heroku config:set MONGOLAB_URI="<db cloud url>"
+// hide config key.js maybe remove from github; set environment variable MONGOLAB_URI="<db cloud url>"; refer to process.env.MONGOLAB_URI in server.js; set env var for MONGOLAB_URI in Heroku like so $heroku config:set MONGOLAB_URI="<db cloud url>"
 // allow access to MongoDB cloud from anywhere (e.g., whitelist IP)
 
 
@@ -180,7 +180,7 @@ router.post("/shrink", (req, res) => {
 			const responseObj = {
 				success: true,
 				long_url: urlDoc.long_url,
-				full_short_url: req.protocol + '://' + req.hostname + '/' + shortUrl
+				full_short_url: req.protocol + '://' + req.hostname + '/' + urlDoc.shortUrl
 			}
 
 			res.json(responseObj);
