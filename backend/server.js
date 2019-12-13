@@ -180,7 +180,7 @@ router.post("/shrink", (req, res) => {
 			const responseObj = {
 				success: true,
 				long_url: urlDoc.long_url,
-				full_short_url: req.protocol + '://' + req.hostname + '/' + urlDoc.shortUrl
+				full_short_url: req.protocol + '://' + req.hostname + '/' + urlDoc.short_url
 			}
 
 			res.json(responseObj);
