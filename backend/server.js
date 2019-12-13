@@ -5,7 +5,6 @@ const logger = require("morgan");
 const cors = require("cors");
 const uuid = require("uuid-v4");
 const path = require("path");
-
 const validator = require("validator");
 
 const Urls = require(path.join(__dirname + "/models/urls.js"));
@@ -25,7 +24,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // HEROKU
-pingHeroku("https://hospital-cost-map.herokuapp.com/", 900000); // pings every 900 seconds, or 15 minutes
+pingHeroku("https://shrink-my-link.herokuapp.com/", 900000); // pings every 900 seconds, or 15 minutes
 
 // REACT
 // references front-end React for use in Heroku deployment, instead of locally running front-end and back-end with $npm start 
@@ -64,7 +63,7 @@ mongoose
 // https://devcenter.heroku.com/articles/mongolab#connecting-to-existing-mlab-deployments-from-heroku
 // use environment variables for sensitive urls like MongoURI
 // - hide config key.js maybe remove from github; set environment variable MONGOLAB_URI="<db cloud url>"; refer to process.env.MONGOLAB_URI in server.js; set env var for MONGOLAB_URI in Heroku like so $heroku config:set MONGOLAB_URI="<db cloud url>"
-
+// allow access to MongoDB cloud from anywhere (e.g., whitelist IP)
 
 
 // TASK
