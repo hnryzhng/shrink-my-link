@@ -7,8 +7,7 @@ const uuid = require("uuid-v4");
 const path = require("path");
 const validator = require("validator");
 
-const dotenv = require('dotenv');
-console.log(dotenv.config({debug:true}));
+require('dotenv').config();	// load env vars
 
 const Urls = require(path.join(__dirname, "/models/urls.js"));
 const Counter = require(path.join(__dirname, "/models/counter.js"));
