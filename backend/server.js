@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // HEROKU
-pingHeroku("http://shrink-my-link.herokuapp.com/", 900000); // pings every 900 seconds, or 15 minutes
+pingHeroku("https://shrink-my-link.herokuapp.com/", 900000); // pings every 900 seconds, or 15 minutes
 
 // REACT
 // references front-end React for use in Heroku deployment, instead of locally running front-end and back-end with $npm start 
