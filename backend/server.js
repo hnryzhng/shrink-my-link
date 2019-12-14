@@ -53,6 +53,9 @@ mongoose
 
 // TASK
 // LOGGING
+// https://stackify.com/node-js-logging/
+// https://www.twilio.com/blog/guide-node-js-logging
+
 
 // ROUTES
 app.use("/api", require("./routes"));	// routes for api requests: root/api/<specific_route>
