@@ -83,6 +83,7 @@ app.post("/shrink", (req, res) => {
 
 	const longUrl = req.body.longUrl;	// front-end param should be longUrl
 	console.log("long url:", longUrl);
+	console.log("req params:", req.params);
 
 	// if not valid url
 	if (!validator.isURL(longUrl)) {
