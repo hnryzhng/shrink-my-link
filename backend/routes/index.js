@@ -9,14 +9,13 @@ const uuid = require("uuid-v4");
 const path = require("path");
 const validator = require("validator");
 
-const Urls = require(path.join(__dirname, "/models/urls.js"));
-const Counter = require(path.join(__dirname, "/models/counter.js"));
-
-const Shrinker = require(path.join(__dirname, "/shrinker.js"));
-const pingHeroku = require(path.join(__dirname, '/ping-heroku.js'));
-
-
 var router = require('express').Router();
+
+const Urls = require(path.join(__dirname, "..", "/models/urls.js"));
+const Counter = require(path.join(__dirname, "..", "/models/counter.js"));
+
+const Shrinker = require(path.join(__dirname, "..", "/shrinker.js"));
+
 
 router.post("/shrink", (req, res) => {
 

@@ -34,7 +34,6 @@ app.get("*", (req, res) => {
 });
 
 // DATABASE 
-// const dbRoute = require(path.join(__dirname, "./config/keys.js").mongoURI;	// cloud db url stored in config file
 const dbRoute = process.env.MONGOLAB_URI;
 console.log("db route:", dbRoute);
 mongoose
@@ -46,10 +45,6 @@ mongoose
 	)
 	.then(() => console.log("connected to MongoDB database"))
 	.catch((err) => console.log("error connecting to MongoDB:", err));
-
-
-
-
 
 // TASK
 // TESTING
@@ -68,166 +63,7 @@ mongoose
 // TASK
 // UPDATE MERN BOILERPLATE
 
-
-// @route POST api/shrink
-// @desc Shorten url from user input  
-// @access Public
-
-// main route: 
-// check if url is already in db upon sending request
-// if not, shorten url, insert in db, then send response obj with shortened url
-// else, retrieve shortened url from db and send response obj with shortened url 
-
-/***
-app.post("/shrink", (req, res) => {
-
-	// TASK
-	// test: process list of over a thousand urls so I get the interesting looking short urls
-
-	const longUrl = req.body.longUrl;	// front-end param should be longUrl
-	console.log("long url:", longUrl);
-
-	// if not valid url
-	if (!validator.isURL(longUrl)) {
-		res.json({
-			success: false,
-			error: "Not a valid url"
-		})
-	}
-
-
-	Urls.findOne({ long_url: longUrl }).then((urlDoc) => {
-
-		
-
-		// grab unique counter from Counter collection, 
-		// have it encoded in Shrinker, 
-		// increment unique_counter by 1 
-		// reinsert/save in Counter collection			
-		
-		
-
-		if (!urlDoc) {
-			// if not found in db
-
-			Counter.findOne({ universal_counter: true }).then((counterDoc) => {
-				
-				if (!counterDoc) {
-					// if doesn't exist, then create and insert it
-
-					const counterObj = {
-						unique_counter: 1
-					}
-
-					const counterRecord = new Counter(counterObj)
-					counterDoc = counterRecord;
-				}
-
-				counterDoc.unique_counter += 1;	// unique counter starts at 2, while test unique counter starts at 1
-				const docId = counterDoc.unique_counter;
-				console.log("Counter Doc incremented unique counter:", counterDoc.unique_counter);
-				console.log("docId:", docId);
-
-				const shortUrl = Shrinker.shrink(docId);	// provided encoded short url given unique counter 
-				console.log("shortUrl:", shortUrl);
-
-				// counterDoc is either inserted or reinserted
-				counterDoc
-					.save()
-					.then( counterRec => console.log('counter doc inserted into db', counterRec))
-					.catch( err => console.log('could not save counter doc to db'));
-
-				// insert long url and shortened url as a doc in the db
-				const urlResponse = {
-					doc_id: docId,
-					long_url: longUrl,
-					short_url: shortUrl
-				}
-
-				const urlRecord = new Urls(urlResponse);
-			
-				urlRecord
-					.save()
-					.then( urlRec => console.log('url doc saved to db', urlRec))
-					.catch( err => console.log('could not save url doc to db'));
-
-
-				// send response obj with payload 
-
-				const responseObj = {
-					success: true,
-					long_url: longUrl,
-					full_short_url: req.protocol + '://' + req.hostname + '/' + shortUrl
-				}
-
-				res.json(responseObj);
-
-			})
-			.catch( (err) => console.log('error finding Counter doc in db', err));
-		} else {
-			// if found in db
-			console.log("doc found in db:", urlDoc);
-
-			const responseObj = {
-				success: true,
-				long_url: urlDoc.long_url,
-				full_short_url: req.protocol + '://' + req.hostname + '/' + urlDoc.short_url
-			}
-
-			res.json(responseObj);
-
-		}
-
-	})
-	.catch( (err) => {
-		console.log("error finding Urls doc in db: ", err) 
-		res.json({ success: false });
-	});
-
-
-});
-
-
-// @route POST api/:shorturl
-// @desc Redirect to long url 
-// @access Public
-
-app.get("/:shorturl", (req, res) => {
-	// retrieve short url and redirect if in db
-	
-	// use app.get() instead of router.get() so I don't have to include '/api' in request
-
-	// TASK: see if redirect works once deployed in production
-	// troubleshoot "redirect with react js express js"
-
-
-
-	const shortUrl = req.params.shorturl;
-	
-	console.log("redirect route short url param:", shortUrl);
-	
-	
-	Urls.findOne({ short_url: shortUrl }).then( function(urlDoc) {
-		if (!urlDoc) {
-			res.json({
-				success: false,
-				error: "Url could not be found"
-			})
-		} else {
-			const fullLongUrl = "https://" + urlDoc.long_url;
-			console.log("redirect route long url:", fullLongUrl);
-			res.redirect(fullLongUrl);
-		}
-	})
-	
-
-});
-
-***/
-
-
 // ROUTES
-
-app.use("/api", require(path.join(__dirname + "/routes")));	// routes for api requests: root/api/<specific_route>
+app.use("/api", require("./routes"));	// routes for api requests: root/api/<specific_route>
 
 module.exports = app.listen(process.env.PORT || api_port, () => console.log(`Listening to ${api_port}`) );
