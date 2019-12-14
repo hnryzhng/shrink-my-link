@@ -51,6 +51,9 @@ mongoose
 // TASK 
 // creating backups of db
 
+// TASK
+// LOGGING
+
 // ROUTES
 app.use("/api", require("./routes"));	// routes for api requests: root/api/<specific_route>
 
