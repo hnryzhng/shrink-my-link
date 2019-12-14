@@ -19,12 +19,12 @@ const router = express.Router();
 const api_port = 3001;
 
 // LOAD MIDDLEWARE
-app.use(bodyParser.urlencoded({ extended:true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
 // HEROKU
-pingHeroku("https://shrink-my-link.herokuapp.com/", 900000); // pings every 900 seconds, or 15 minutes
+pingHeroku("http://shrink-my-link.herokuapp.com/", 900000); // pings every 900 seconds, or 15 minutes
 
 // REACT
 // references front-end React for use in Heroku deployment, instead of locally running front-end and back-end with $npm start 
@@ -197,23 +197,27 @@ app.get("/:shorturl", (req, res) => {
 	// troubleshoot "redirect with react js express js"
 
 	const shortUrl = req.params.shorturl;
+	
 	console.log("redirect route short url param:", shortUrl);
 	
-	Urls.findOne({ short_url: shortUrl }).then((urlDoc) => {
+	/*
+	Urls.findOne({ short_url: shortUrl }).then( function(urlDoc) {
 		if (!urlDoc) {
 			res.json({
 				success: false,
 				error: "Url could not be found"
 			})
 		} else {
-			console.log("redirect route long url:", urlDoc.long_url);
-			res.status(301).redirect(urlDoc.long_url);
+			const fullLongUrl = "https://" + urlDoc.long_url;
+			console.log("redirect route long url:", fullLongUrl);
+			res.redirect(fullLongUrl);
 		}
 	})
+	*/
 
 });
 
 
 
-app.use("/api", router);	// allows react to send api request using "api" in request URL by appending it to routes with Router
+// app.use("/api", router);	// allows react to send api request using "api" in request URL by appending it to routes with Router
 module.exports = app.listen(process.env.PORT || api_port, () => console.log(`Listening to ${api_port}`) );
