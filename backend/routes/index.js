@@ -1,12 +1,6 @@
 // routes/index.js
 
 
-//const mongoose = require("mongoose");
-//const express = require("express");
-//const bodyParser = require("body-parser");
-//const logger = require("morgan");
-//const cors = require("cors");
-//const uuid = require("uuid-v4");
 const path = require("path");
 const validator = require("validator");
 
