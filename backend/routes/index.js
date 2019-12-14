@@ -1,11 +1,12 @@
 // routes/index.js
 
-const mongoose = require("mongoose");
-const express = require("express");
-const bodyParser = require("body-parser");
-const logger = require("morgan");
-const cors = require("cors");
-const uuid = require("uuid-v4");
+
+//const mongoose = require("mongoose");
+//const express = require("express");
+//const bodyParser = require("body-parser");
+//const logger = require("morgan");
+//const cors = require("cors");
+//const uuid = require("uuid-v4");
 const path = require("path");
 const validator = require("validator");
 
@@ -16,6 +17,10 @@ const Counter = require(path.join(__dirname, "..", "/models/counter.js"));
 
 const Shrinker = require(path.join(__dirname, "..", "/shrinker.js"));
 
+
+// @route POST api/shrink
+// @desc Shorten url input 
+// @access Public
 
 router.post("/shrink", (req, res) => {
 

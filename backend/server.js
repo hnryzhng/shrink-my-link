@@ -15,8 +15,7 @@ const pingHeroku = require(path.join(__dirname, '/ping-heroku.js'));
 
 // INSTANTIATE APP 
 const app = express();
-const router = express.Router();
-const api_port = 3001;
+const api_port = process.env.PORT || 3001;
 
 // LOAD MIDDLEWARE
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -46,24 +45,11 @@ mongoose
 	.then(() => console.log("connected to MongoDB database"))
 	.catch((err) => console.log("error connecting to MongoDB:", err));
 
-// TASK
-// TESTING
-// add tutorials and code to boilerplate
-// server.js: call/serve React scripts,  module.exports = app.listen(), env vars for port 
-
-
-// TASK
-// ROUTES
-// add to boilerplate
-// modularize routes: http://catlau.co/how-to-modularize-routes-with-the-express-router/
 
 // TASK 
 // creating backups of db
 
-// TASK
-// UPDATE MERN BOILERPLATE
-
 // ROUTES
 app.use("/api", require("./routes"));	// routes for api requests: root/api/<specific_route>
 
-module.exports = app.listen(process.env.PORT || api_port, () => console.log(`Listening to ${api_port}`) );
+module.exports = app.listen(api_port, () => console.log(`Listening to ${api_port}`) );
