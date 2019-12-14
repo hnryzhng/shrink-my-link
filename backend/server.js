@@ -7,11 +7,11 @@ const uuid = require("uuid-v4");
 const path = require("path");
 const validator = require("validator");
 
-const Urls = require(path.join(__dirname + "/models/urls.js"));
-const Counter = require(path.join(__dirname + "/models/counter.js"));
+const Urls = require(path.join(__dirname, "/models/urls.js"));
+const Counter = require(path.join(__dirname, "/models/counter.js"));
 
-const Shrinker = require(path.join(__dirname + "/shrinker.js"));
-const pingHeroku = require(path.join(__dirname + '/ping-heroku.js'));
+const Shrinker = require(path.join(__dirname, "/shrinker.js"));
+const pingHeroku = require(path.join(__dirname, '/ping-heroku.js'));
 
 // INSTANTIATE APP 
 const app = express();
@@ -30,11 +30,11 @@ pingHeroku("https://shrink-my-link.herokuapp.com/", 900000); // pings every 900 
 // references front-end React for use in Heroku deployment, instead of locally running front-end and back-end with $npm start 
 app.use(express.static(path.join(__dirname,"../client/build")));	
 app.get("*", (req, res) => {
-	res.sendFile(path.join(__dirname+"../client/build/index.html"));
+	res.sendFile(path.join(__dirname,"/../client/build/index.html"));
 });
 
 // DATABASE 
-// const dbRoute = require(path.join(__dirname + "./config/keys.js").mongoURI;	// cloud db url stored in config file
+// const dbRoute = require(path.join(__dirname, "./config/keys.js").mongoURI;	// cloud db url stored in config file
 const dbRoute = process.env.MONGOLAB_URI;
 console.log("db route:", dbRoute);
 mongoose
