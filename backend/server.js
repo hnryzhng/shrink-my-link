@@ -76,14 +76,14 @@ mongoose
 // check if url is already in db upon sending request
 // if not, shorten url, insert in db, then send response obj with shortened url
 // else, retrieve shortened url from db and send response obj with shortened url 
-app.post("/shrink", (req, res) => {
+app.post("/shrink/:paramurl", (req, res) => {
 
 	// TASK
 	// test: process list of over a thousand urls so I get the interesting looking short urls
 
 	const longUrl = req.body.longUrl;	// front-end param should be longUrl
 	console.log("long url:", longUrl);
-	console.log("req params:", req.params);
+	console.log("req params:", req.params.paramurl);
 
 	// if not valid url
 	if (!validator.isURL(longUrl)) {
