@@ -8,7 +8,7 @@ const path = require("path");
 const validator = require("validator");
 
 const dotenv = require('dotenv');
-dotenv.config();
+console.log(dotenv.config({debug:true}));
 
 const Urls = require(path.join(__dirname, "/models/urls.js"));
 const Counter = require(path.join(__dirname, "/models/counter.js"));
