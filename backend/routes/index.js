@@ -1,85 +1,8 @@
-const mongoose = require("mongoose");
-const express = require("express");
-const bodyParser = require("body-parser");
-const logger = require("morgan");
-const cors = require("cors");
-const uuid = require("uuid-v4");
-const path = require("path");
-const validator = require("validator");
+// routes/index.js
 
-const Urls = require(path.join(__dirname, "/models/urls.js"));
-const Counter = require(path.join(__dirname, "/models/counter.js"));
+var router = require('express').Router();
 
-const Shrinker = require(path.join(__dirname, "/shrinker.js"));
-const pingHeroku = require(path.join(__dirname, '/ping-heroku.js'));
-
-// INSTANTIATE APP 
-const app = express();
-const router = express.Router();
-const api_port = 3001;
-
-// LOAD MIDDLEWARE
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(cors());
-
-// HEROKU
-pingHeroku("https://shrink-my-link.herokuapp.com/", 900000); // pings every 900 seconds, or 15 minutes
-
-// REACT
-// references front-end React for use in Heroku deployment, instead of locally running front-end and back-end with $npm start 
-app.use(express.static(path.join(__dirname,"../client/build")));	
-app.get("*", (req, res) => {
-	res.sendFile(path.join(__dirname,"/../client/build/index.html"));
-});
-
-// DATABASE 
-// const dbRoute = require(path.join(__dirname, "./config/keys.js").mongoURI;	// cloud db url stored in config file
-const dbRoute = process.env.MONGOLAB_URI;
-console.log("db route:", dbRoute);
-mongoose
-	.connect(
-		dbRoute,
-		{	useNewUrlParser: true,
-			useUnifiedTopology: true	// this mongoose version requires this parameter
-		},
-	)
-	.then(() => console.log("connected to MongoDB database"))
-	.catch((err) => console.log("error connecting to MongoDB:", err));
-
-
-
-
-
-// TASK
-// TESTING
-// add tutorials and code to boilerplate
-// server.js: call/serve React scripts,  module.exports = app.listen(), env vars for port 
-
-
-// TASK
-// ROUTES
-// add to boilerplate
-// modularize routes: http://catlau.co/how-to-modularize-routes-with-the-express-router/
-
-// TASK 
-// creating backups of db
-
-// TASK
-// UPDATE MERN BOILERPLATE
-
-
-// @route POST api/shrink
-// @desc Shorten url from user input  
-// @access Public
-
-// main route: 
-// check if url is already in db upon sending request
-// if not, shorten url, insert in db, then send response obj with shortened url
-// else, retrieve shortened url from db and send response obj with shortened url 
-
-/***
-app.post("/shrink", (req, res) => {
+router.post("/shrink", (req, res) => {
 
 	// TASK
 	// test: process list of over a thousand urls so I get the interesting looking short urls
@@ -98,14 +21,14 @@ app.post("/shrink", (req, res) => {
 
 	Urls.findOne({ long_url: longUrl }).then((urlDoc) => {
 
-		
+		/**
 
-		// grab unique counter from Counter collection, 
-		// have it encoded in Shrinker, 
-		// increment unique_counter by 1 
-		// reinsert/save in Counter collection			
+		grab unique counter from Counter collection, 
+		have it encoded in Shrinker, 
+		increment unique_counter by 1 
+		reinsert/save in Counter collection			
 		
-		
+		**/
 
 		if (!urlDoc) {
 			// if not found in db
@@ -187,12 +110,11 @@ app.post("/shrink", (req, res) => {
 
 });
 
-
 // @route POST api/:shorturl
 // @desc Redirect to long url 
 // @access Public
 
-app.get("/:shorturl", (req, res) => {
+router.get("/:shorturl", (req, res) => {
 	// retrieve short url and redirect if in db
 	
 	// use app.get() instead of router.get() so I don't have to include '/api' in request
@@ -206,7 +128,7 @@ app.get("/:shorturl", (req, res) => {
 	
 	console.log("redirect route short url param:", shortUrl);
 	
-	
+	/*
 	Urls.findOne({ short_url: shortUrl }).then( function(urlDoc) {
 		if (!urlDoc) {
 			res.json({
@@ -219,15 +141,10 @@ app.get("/:shorturl", (req, res) => {
 			res.redirect(fullLongUrl);
 		}
 	})
-	
+	*/
 
 });
 
-***/
 
 
-// ROUTES
-
-app.use("/api", require(path.join(__dirname + "/routes")));	// routes for api requests: root/api/<specific_route>
-
-module.exports = app.listen(process.env.PORT || api_port, () => console.log(`Listening to ${api_port}`) );
+module.exports = router;
