@@ -76,7 +76,7 @@ mongoose
 // check if url is already in db upon sending request
 // if not, shorten url, insert in db, then send response obj with shortened url
 // else, retrieve shortened url from db and send response obj with shortened url 
-router.post("/shrink", (req, res) => {
+app.post("/shrink", (req, res) => {
 
 	// TASK
 	// test: process list of over a thousand urls so I get the interesting looking short urls
