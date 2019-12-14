@@ -9,7 +9,7 @@
     "local": "concurrently \"cd backend && node server.js\" \"cd client && npm start\"",
     "test": "mocha"
   },
-  "comments":{
+  "comments": {
     "heroku": "npm start serves backend with refs to react, heroku-postbuild installs frontend after deployment"
   },
   "keywords": [],
@@ -19,6 +19,7 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "concurrently": "^5.0.0",
+    "dotenv": "^8.2.0",
     "mocha": "^6.2.2",
     "mongoose": "^5.8.0"
   }
