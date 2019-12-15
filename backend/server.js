@@ -56,6 +56,9 @@ mongoose
 // https://www.twilio.com/blog/guide-node-js-logging
 // http://www.jyotman.xyz/post/logging-in-node.js-done-right
 
+// TASK
+// get redirect working, refer to file "REDIRECT_HELP.txt"
+
 
 // ROUTES
 app.use("/api", require("./routes"));	// routes for api requests: root/api/<specific_route>
