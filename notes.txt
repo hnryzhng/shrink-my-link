@@ -1,3 +1,0 @@
-refer to url shortener
-
-https://github.com/hnryzhng/url-shortener/

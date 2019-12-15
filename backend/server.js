@@ -53,8 +53,8 @@ mongoose
 
 // TASK
 // LOGGING
-// https://stackify.com/node-js-logging/
 // https://www.twilio.com/blog/guide-node-js-logging
+// http://www.jyotman.xyz/post/logging-in-node.js-done-right
 
 
 // ROUTES

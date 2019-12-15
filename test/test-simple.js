@@ -1,11 +1,9 @@
 
-// TASK
-// Testing
-// Testing framework with Mocha: https://blog.logrocket.com/a-quick-and-complete-guide-to-mocha-testing-d0e0ea09f09d/
-// Unit testing with Mocha, Chai: https://codeburst.io/javascript-unit-testing-using-mocha-and-chai-1d97d9f18e71
-// Chai assertion methods: https://www.chaijs.com/guide/styles/
-// Testing requests with Chai HTTP: https://mherman.org/blog/testing-node-js-with-mocha-and-chai/
-// React testing: https://medium.com/@houstoncbreedlove/basics-intro-to-testing-react-components-with-mocha-chai-enzyme-and-sinon-c8b82ce58df8
+// TESTING
+
+// React testing
+// React testing Enzyme vs. Jest
+// React testing with Jest: https://www.valentinog.com/blog/testing-react/
 
 
 const chai = require('chai');
