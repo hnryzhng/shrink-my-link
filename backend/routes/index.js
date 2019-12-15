@@ -131,6 +131,11 @@ router.post("/shrink", (req, res) => {
 router.get("/convert/:shorturl", (req, res) => {
 	// retrieve short url and redirect if in db
 	
+	// TASK
+	// troubleshoot
+	// https://stackoverflow.com/questions/54503380/getting-url-parameter-from-react-to-node
+
+
 	// troubleshoot "redirect with react js express js"
 
 	const shortUrl = req.params.shorturl;
