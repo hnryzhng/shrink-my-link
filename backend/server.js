@@ -47,9 +47,11 @@ mongoose
 	.then(() => console.log("connected to MongoDB database"))
 	.catch((err) => console.log("error connecting to MongoDB:", err));
 
+// TASK
+// Testing React components: refer to test files for docs
 
 // TASK 
-// creating backups of db
+// create backups of db
 
 // TASK
 // LOGGING
@@ -59,6 +61,8 @@ mongoose
 // TASK
 // get redirect working, refer to file "REDIRECT_HELP.txt"
 
+// TASK
+// scrape 1,000 popular urls, insert into db
 
 // ROUTES
 app.use("/api", require("./routes"));	// routes for api requests: root/api/<specific_route>

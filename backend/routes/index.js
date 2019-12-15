@@ -128,15 +128,10 @@ router.post("/shrink", (req, res) => {
 // @desc Redirect to long url 
 // @access Public
 
-router.get("/:shorturl", (req, res) => {
+router.get("/convert/:shorturl", (req, res) => {
 	// retrieve short url and redirect if in db
 	
-	// use app.get() instead of router.get() so I don't have to include '/api' in request
-
-	// TASK: see if redirect works once deployed in production
 	// troubleshoot "redirect with react js express js"
-
-
 
 	const shortUrl = req.params.shorturl;
 	
