@@ -27,12 +27,7 @@ app.use(cors());
 // HEROKU
 pingHeroku("https://shrink-my-link.herokuapp.com/", 900000); // pings every 900 seconds, or 15 minutes
 
-// REACT
-// references front-end React for use in Heroku deployment, instead of locally running front-end and back-end with $npm start 
-app.use(express.static(path.join(__dirname,"../client/build")));	
-app.get("*", (req, res) => {
-	res.sendFile(path.join(__dirname,"/../client/build/index.html"));
-});
+
 
 // DATABASE 
 const dbRoute = process.env.MONGOLAB_URI;
@@ -66,5 +61,14 @@ mongoose
 
 // ROUTES
 app.use("/api", require("./routes"));	// routes for api requests: root/api/<specific_route>
+
+
+// REACT
+// references front-end React for use in Heroku deployment, instead of locally running front-end and back-end with $npm start 
+app.use(express.static(path.join(__dirname,"/../client/build")));	
+app.get("*", (req, res) => {
+	res.sendFile(path.join(__dirname,"/../client/build/index.html"));
+});
+
 
 module.exports = app.listen(api_port, () => console.log(`Listening to ${api_port}`) );

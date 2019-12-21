@@ -142,7 +142,7 @@ router.get("/convert/:shorturl", (req, res) => {
 	
 	console.log("redirect route short url param:", shortUrl);
 	
-	/*
+	
 	Urls.findOne({ short_url: shortUrl }).then( function(urlDoc) {
 		if (!urlDoc) {
 			res.json({
@@ -155,7 +155,7 @@ router.get("/convert/:shorturl", (req, res) => {
 			res.redirect(fullLongUrl);
 		}
 	})
-	*/
+	
 
 });
 
