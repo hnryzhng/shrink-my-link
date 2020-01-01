@@ -15,8 +15,9 @@ class App extends Component {
     const urlInput = this.state.urlInput;
     console.log("state urlInput:", this.state.urlInput);
     
-    // axios.post("http://localhost:3001/api/shrink", {
-    axios.post("/api/shrink", {
+    const baseURL = process.env.baseURL || "http://localhost:3001";
+
+    axios.post(`${baseURL}/api/shrink`, {
             longUrl: urlInput
           })
           .then(response => response.data)
