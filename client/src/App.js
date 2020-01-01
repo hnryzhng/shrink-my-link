@@ -3,10 +3,57 @@ import axios from 'axios';
 
 class App extends Component {
 
+  render() {
+    
+    return (
+
+      <div>
+
+        <NaviBar />
+
+        <ShrinkModule />
+
+      </div>
+    );
+  }
+
+}
+
+class NaviBar extends Component {
+
+  render() {
+    return(
+
+      <nav id="navibar" className="navbar navbar-expand-md shadow-sm bg-white rounded">
+
+            <Logo />
+
+      </nav>
+
+    )
+  }
+
+}
+
+
+class Logo extends Component {
+  render() {
+    return(
+    
+      <a className="navbar-brand" id="logo-container" href="/">
+        <img src={ require("/") } alt="shrink my link"/>
+      </a>  
+    
+    )
+  }
+}
+
+
+class ShrinkModule extends Component {
+
   state = {
-  	urlInput: null,
-    links: [], // [{long_url: "", full_short_url: ""}, ...]
-    error: null
+    urlInput: null,
+    links: [] // [{long_url: "", full_short_url: ""}, ...]
   }
 
   sendUrl = (event) => {
@@ -15,7 +62,7 @@ class App extends Component {
     const urlInput = this.state.urlInput;
     console.log("state urlInput:", this.state.urlInput);
     
-    const baseURL = process.env.baseURL || "http://localhost:3001";
+    const baseURL = process.env.baseURL || "http://localhost:3001";     
 
     axios.post(`${baseURL}/api/shrink`, {
             longUrl: urlInput
@@ -28,7 +75,6 @@ class App extends Component {
               this.setState( { links: [...this.state.links, {long_url: data.long_url, full_short_url: data.full_short_url}] } );
             } else {      
               console.log("could not shrink your link");
-              this.setState({ error: data.error })  // sets error message 
             }
 
           })
@@ -36,28 +82,33 @@ class App extends Component {
 
   }
 
-
   render() {
-    
-    return (
-
-      <div>
-        <h1> SHRINK MY LINK </h1>
+    return(
+      <>
 
         <form onSubmit={ this.sendUrl }>
           <input type="text" style={{ width: "300px" }} placeholder="Your URL!" name="longUrl" onChange={ event => this.setState({ urlInput: event.target.value }) } />
           <button type="submit">SHRINK ME</button >
         </form>
 
-        <div id="error-container" style={{ width: "300px" }} >
-          Err Message: {this.state.error}
-        </div>
+        <ListContainer links={ this.state.links } />
 
-        <div id="listContainer" style={{ width: "300px", height: "500px", border: "1px solid black" }}>
-          <List links={ this.state.links } />
-        </div>
+      </>
+
+    )
+  }
+}
+
+class ListContainer extends Component {
+
+  render(){
+    return(
+
+      <div id="listContainer" style={{ width: "300px", height: "500px", border: "1px solid black" }}>
+        <List links={ this.props.links } />
       </div>
-    );
+
+    )
   }
 
 }
