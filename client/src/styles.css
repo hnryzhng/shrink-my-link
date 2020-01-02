@@ -1,7 +1,12 @@
 
+.section-test {
+	padding-top: 5em;
+	padding-bottom: 5em;
+	border: 2px solid black;
+}
+
 .parallax {
 	//background-image: url("./static/parallax-sunset.jpg");
-	height: 500px;
 	background-attachment: fixed;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -16,7 +21,7 @@
 	margin: 0 auto;
 }
 
-#shrink-section-content {
+.section-heading {
 	margin: 1em 0 1em 0;
 	font-size: 2.8em;
 	text-align: center;
@@ -27,14 +32,56 @@
 	width: 60%;
 }
 
-#shrink-form-row {
-
-}
-
 #shrink-text-input {
 	height: 3em;
 }
 
 #shrink-button {
 	height: 3.8em;
+}
+
+#list-container {
+	margin: 0 auto;
+	width: 62%;
+	height: 60%;
+	border: 1px solid #c4c4c4;
+	border-radius: 10px;
+}
+
+#project-info-icon {
+	margin: 0 auto;
+}
+
+#project-info-content {
+	text-align: center;
+	font-size: 2em;
+}
+
+#contact-content {
+	font-size: 1.5em;
+}
+
+#avatar {
+	width: 8em;
+	margin: 0 auto;
+	border: 1px solid black;
+	border-radius: 100%;
+}
+
+#contact-info p {
+	text-align: center;
+}
+
+#contact-info #name {
+	font-size: 2.5em;
+}
+
+#contact-info #resume {
+	text-align: center;
+}
+
+#contact-info li {
+	font-size: 1.6em;
+	text-align: center;
+
 }

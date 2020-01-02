@@ -11,11 +11,13 @@ class App extends Component {
       <div>
 
         <NaviBar />
-
+        
         <ShrinkModule />
-
+        
+        <ProjectInfo />
+        
         <Contact />
-
+        
       </div>
     );
   }
@@ -118,24 +120,26 @@ class ShrinkModule extends Component {
   render() {
     return(
       <section className="parallax" id="shrink-section">
+        <div className="section-container">
 
-        <p id="shrink-section-content">
-          Take control of your brand.
-        </p>
+          <p className="section-heading" id="shrink-section-content">
+            Take control of your brand.
+          </p>
 
-        <div className="container-fluid" id="shrink-container">
-          <form id="shrink-form" onSubmit={ this.sendUrl }>
-            <div className="form-group row" id="shrink-form-row">
+          <div className="container-fluid" id="shrink-container">
+            <form id="shrink-form" onSubmit={ this.sendUrl }>
+              <div className="form-group row" id="shrink-form-row">
 
-                <input type="text" className="col-md-10 form-control form-control-lg" id="shrink-text-input" placeholder="Your URL!" name="longUrl" onChange={ event => this.setState({ urlInput: event.target.value }) } />
-                <button type="submit" class="col-md-2 btn btn-primary" id="shrink-button">shrink me</button >
-              
-            </div>
-          </form>
+                  <input type="text" className="col-md-10 form-control form-control-lg" id="shrink-text-input" placeholder="Your URL!" name="longUrl" onChange={ event => this.setState({ urlInput: event.target.value }) } />
+                  <button type="submit" className="col-md-2 btn btn-primary" id="shrink-button">shrink me</button >
+                
+              </div>
+            </form>
+          </div>
+
+          <ListContainer links={ this.state.links } />
+
         </div>
-
-        <ListContainer links={ this.state.links } />
-
       </section>
 
     )
@@ -147,7 +151,7 @@ class ListContainer extends Component {
   render(){
     return(
 
-      <div id="listContainer" style={{ width: "300px", height: "500px", border: "1px solid black" }}>
+      <div id="list-container">
         <List links={ this.props.links } />
       </div>
 
@@ -163,13 +167,17 @@ class List extends Component {
       return <Item key={index} urlObj={urlObj} />
     });
 
-    return <ul> {list} </ul>
+    return <ul className="list-group list-unstyled"> {list} </ul>
 
   }
 
 }
 
 class Item extends Component {
+
+  // TASK: copy function
+  // TASK: limit to 3 links per IP address
+  // TASK: if long url length too long, limit display in overflow
 
   render() {
 
@@ -178,9 +186,16 @@ class Item extends Component {
     const fullShortUrl = urlObj.full_short_url;
 
     return(
-      <div>
-        <li long_url={ longUrl } full_short_url={ fullShortUrl } ></li> 
-        long url: { longUrl } ||| shortened url: {fullShortUrl}
+      <div className="container-fluid list-group-item list-group-item-action">
+        <div className="row">
+
+          <li long-url={ longUrl } full-short-url={ fullShortUrl } ></li> 
+          <div className="col-md-6 long-url"> { longUrl } </div>
+          <div className="col-md-3 full-short-url"> {fullShortUrl} </div>
+
+        <button type="button" className="col-md-3">COPY</button>
+
+        </div>
       </div>
     )
 
@@ -189,12 +204,61 @@ class Item extends Component {
 
 }
 
+class ProjectInfo extends Component {
+  render() {
+    return(
+
+      <section id="project-info-section">
+        <div className="section-container">
+
+          <p className="section-heading" id="project-info-heading"> About this project </p>
+        
+          
+          <img className="d-flex justify-content-center" id="project-info-icon" src={ require('./static/icons/barchart.png')} alt="" /> 
+        
+
+          <span id="project-info-content">
+            <p>
+              This is a demo project built using React.js and Node.js.
+              If you want to see more of my work, please check out my 
+              GitHub page. 
+            </p>
+          </span>
+
+        </div>
+      </section>
+    )
+  }
+}
+
 class Contact extends Component {
 
   render() {
     return(
       <section id="contact-section">
+        <div className="section-container">
+        
+          <p className="section-heading" id="contact-heading"> Get in touch </p>
+          
 
+            <div id="contact-info">
+              
+              <img className="d-flex justify-content-center" id="avatar" src={require("./static/logo200x200.png")} alt="" /> 
+              
+              <p id="name"> Henry Zheng </p>
+              <p><a id="resume" href={ require('./static/resume.pdf') } alt=""> View Resume </a></p>
+
+              <div className="container-fluid">
+                  <ul className="list-unstyled" id="personal-links">
+                    
+                    <li><button type="button" className="btn btn-primary" href="https://www.github.com/hnryzhng">GitHub</button></li>
+                    <li><button type="button" className="btn btn-primary" href="https://www.linkedin.com/in/hnryzhng">LinkedIn</button></li>
+                  
+                  </ul>
+              </div>
+            </div>
+
+        </div>
       </section>
     )
   }
