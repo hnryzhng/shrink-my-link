@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import "./styles.css";
 
 class App extends Component {
 
@@ -11,7 +12,9 @@ class App extends Component {
 
         <NaviBar />
 
-        <ShrinkModule />
+        <div className="parallax" id="parallax-bg-1">
+          <ShrinkModule />
+        </div>
 
       </div>
     );

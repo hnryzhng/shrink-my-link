@@ -25,9 +25,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // HEROKU
-pingHeroku("https://shrink-my-link.herokuapp.com/", 900000); // pings every 900 seconds, or 15 minutes
-
-
+// pingHeroku("https://shrink-my-link.herokuapp.com/", 900000); // pings every 900 seconds, or 15 minutes
 
 // DATABASE 
 const dbRoute = process.env.MONGOLAB_URI;
