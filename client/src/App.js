@@ -12,9 +12,9 @@ class App extends Component {
 
         <NaviBar />
 
-        <div className="parallax" id="parallax-bg-1">
-          <ShrinkModule />
-        </div>
+        <ShrinkModule />
+
+        <Contact />
 
       </div>
     );
@@ -31,6 +31,8 @@ class NaviBar extends Component {
 
             <Logo />
 
+            <NavigationMenu />
+
       </nav>
 
     )
@@ -44,13 +46,41 @@ class Logo extends Component {
     return(
     
       <a className="navbar-brand" id="logo-container" href="/">
-        <img src={ require("/") } alt="shrink my link"/>
+        <img src={ require("./static/logo_cropped.png") } alt="shrink my link"/>
       </a>  
     
     )
   }
 }
 
+class NavigationMenu extends Component {
+  render() {
+    return(
+    <div className="container-fluid">
+      <div className="d-md-flex justify-content-end" id="navigation-menu-container">
+        <div id="navigation-menu">
+          <ul className="navbar-nav">
+
+            <li className="nav-item">
+              <button type="button" className="nav-link btn btn-link" id="shrink-link-nav-item">
+                Shrink URL
+              </button>            
+            </li>
+
+            <li className="nav-item">
+              <button type="button" className="nav-link btn btn-link" id="contact-nav-item">
+                Contact Me
+              </button>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+      </div>
+
+    )
+  }
+}
 
 class ShrinkModule extends Component {
 
@@ -87,16 +117,26 @@ class ShrinkModule extends Component {
 
   render() {
     return(
-      <>
+      <section className="parallax" id="shrink-module-section">
 
-        <form onSubmit={ this.sendUrl }>
-          <input type="text" style={{ width: "300px" }} placeholder="Your URL!" name="longUrl" onChange={ event => this.setState({ urlInput: event.target.value }) } />
-          <button type="submit">SHRINK ME</button >
-        </form>
+        <p id="shrink-section-content">
+          Take control of your brand.
+        </p>
+
+        <div className="container-fluid d-flex justify-content-center" id="shrink-container">
+          <form className="form-inline" id="shrink-form" onSubmit={ this.sendUrl }>
+            <div className="form-group">
+    
+              <input type="text" className="col form-control form-control-lg" id="shrink-text-input" placeholder="Your URL!" name="longUrl" onChange={ event => this.setState({ urlInput: event.target.value }) } />
+              <button type="submit" class="col btn btn-primary" id="shrink-button">shrink me</button >
+      
+            </div>
+          </form>
+        </div>
 
         <ListContainer links={ this.state.links } />
 
-      </>
+      </section>
 
     )
   }
@@ -148,4 +188,18 @@ class Item extends Component {
   }
 
 }
+
+class Contact extends Component {
+
+  render() {
+    return(
+      <section id="contact-section">
+
+      </section>
+    )
+  }
+
+}
+
+
 export default App;

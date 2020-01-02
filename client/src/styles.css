@@ -1,9 +1,29 @@
 
 .parallax {
-	background-image: url("./static/parallax-sunset.jpg");
+	//background-image: url("./static/parallax-sunset.jpg");
 	height: 500px;
 	background-attachment: fixed;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+}
+
+#navigation-menu-container {
+	width: 100%;
+}
+
+#shrink-container {
+	margin: 0 auto;
+}
+
+#shrink-form {
+	margin: 0 auto;
+}
+
+#shrink-text-input {
+	height: 3em;
+}
+
+#shrink-button {
+	height: 3.8em;
 }
