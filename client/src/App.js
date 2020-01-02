@@ -64,15 +64,15 @@ class NavigationMenu extends Component {
           <ul className="navbar-nav">
 
             <li className="nav-item">
-              <button type="button" className="nav-link btn btn-link" id="shrink-link-nav-item">
+              <a href="#shrink-tag" className="nav-link" id="shrink-link-nav-item">
                 Shrink URL
-              </button>            
+              </a>            
             </li>
 
             <li className="nav-item">
-              <button type="button" className="nav-link btn btn-link" id="contact-nav-item">
+              <a href="#contact-tag"className="nav-link" id="contact-nav-item">
                 Contact Me
-              </button>
+              </a>
             </li>
 
           </ul>
@@ -119,10 +119,12 @@ class ShrinkModule extends Component {
 
   render() {
     return(
-      <section className="parallax" id="shrink-section">
-        <div className="section-container">
+      <section>
+        <div className="section-container parallax" id="shrink-section">
 
-          <p className="section-heading" id="shrink-section-content">
+          <a id="shrink-tag"></a>
+
+          <p className="section-heading" id="shrink-section-heading">
             Take control of your brand.
           </p>
 
@@ -130,7 +132,7 @@ class ShrinkModule extends Component {
             <form id="shrink-form" onSubmit={ this.sendUrl }>
               <div className="form-group row" id="shrink-form-row">
 
-                  <input type="text" className="col-md-10 form-control form-control-lg" id="shrink-text-input" placeholder="Your URL!" name="longUrl" onChange={ event => this.setState({ urlInput: event.target.value }) } />
+                  <input type="text" className="col-md-10 form-control form-control-lg" id="shrink-text-input" placeholder="Put in your URL!" name="longUrl" onChange={ event => this.setState({ urlInput: event.target.value }) } />
                   <button type="submit" className="col-md-2 btn btn-primary" id="shrink-button">shrink me</button >
                 
               </div>
@@ -208,8 +210,8 @@ class ProjectInfo extends Component {
   render() {
     return(
 
-      <section id="project-info-section">
-        <div className="section-container">
+      <section>
+        <div className="section-container" id="project-info-section">
 
           <p className="section-heading" id="project-info-heading"> About this project </p>
         
@@ -220,8 +222,7 @@ class ProjectInfo extends Component {
           <span id="project-info-content">
             <p>
               This is a demo project built using React.js and Node.js.
-              If you want to see more of my work, please check out my 
-              GitHub page. 
+              If you want to see more of my work, please check out my GitHub page given below. 
             </p>
           </span>
 
@@ -235,15 +236,15 @@ class Contact extends Component {
 
   render() {
     return(
-      <section id="contact-section">
-        <div className="section-container">
+      <section>
+        <div className="section-container" id="contact-section">
         
           <p className="section-heading" id="contact-heading"> Get in touch </p>
-          
+            <a id="contact-tag"></a>          
 
             <div id="contact-info">
               
-              <img className="d-flex justify-content-center" id="avatar" src={require("./static/logo200x200.png")} alt="" /> 
+              <img className="d-flex justify-content-center" id="avatar" src={require("./static/avatar.png")} alt="" /> 
               
               <p id="name"> Henry Zheng </p>
               <p><a id="resume" href={ require('./static/resume.pdf') } alt=""> View Resume </a></p>

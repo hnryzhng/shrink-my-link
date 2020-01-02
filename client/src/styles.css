@@ -1,16 +1,21 @@
 
-.section-test {
-	padding-top: 5em;
-	padding-bottom: 5em;
-	border: 2px solid black;
+.section-container {
+	padding-top: 1em;
+	padding-bottom: 2em;
 }
 
 .parallax {
-	//background-image: url("./static/parallax-sunset.jpg");
+	//background-image: url("");
 	background-attachment: fixed;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+}
+
+#navibar {
+	position: fixed;
+	width: 100%;
+	z-index: 9999;
 }
 
 #navigation-menu-container {
@@ -22,9 +27,18 @@
 }
 
 .section-heading {
-	margin: 1em 0 1em 0;
-	font-size: 2.8em;
+	margin: 1em 0 0.3em 0;
+	font-size: 3em;
 	text-align: center;
+	font-weight: 500;
+}
+
+#shrink-section {
+	padding-top: 10em ;
+}
+
+#shrink-section-heading {
+	color: white;
 }
 
 #shrink-form {
@@ -43,9 +57,13 @@
 #list-container {
 	margin: 0 auto;
 	width: 62%;
-	height: 60%;
-	border: 1px solid #c4c4c4;
+	height: 6em;
+	//border: 1px solid #c4c4c4;
 	border-radius: 10px;
+}
+
+#project-info-section {
+	background-color: #fff;
 }
 
 #project-info-icon {
@@ -55,6 +73,11 @@
 #project-info-content {
 	text-align: center;
 	font-size: 2em;
+	color: #253030;
+}
+
+#contact-section {
+	background-color: #f6f6f9;
 }
 
 #contact-content {
@@ -62,10 +85,8 @@
 }
 
 #avatar {
-	width: 8em;
+	width: 12em;
 	margin: 0 auto;
-	border: 1px solid black;
-	border-radius: 100%;
 }
 
 #contact-info p {
