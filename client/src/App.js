@@ -117,19 +117,19 @@ class ShrinkModule extends Component {
 
   render() {
     return(
-      <section className="parallax" id="shrink-module-section">
+      <section className="parallax" id="shrink-section">
 
         <p id="shrink-section-content">
           Take control of your brand.
         </p>
 
-        <div className="container-fluid d-flex justify-content-center" id="shrink-container">
-          <form className="form-inline" id="shrink-form" onSubmit={ this.sendUrl }>
-            <div className="form-group">
-    
-              <input type="text" className="col form-control form-control-lg" id="shrink-text-input" placeholder="Your URL!" name="longUrl" onChange={ event => this.setState({ urlInput: event.target.value }) } />
-              <button type="submit" class="col btn btn-primary" id="shrink-button">shrink me</button >
-      
+        <div className="container-fluid" id="shrink-container">
+          <form id="shrink-form" onSubmit={ this.sendUrl }>
+            <div className="form-group row" id="shrink-form-row">
+
+                <input type="text" className="col-md-10 form-control form-control-lg" id="shrink-text-input" placeholder="Your URL!" name="longUrl" onChange={ event => this.setState({ urlInput: event.target.value }) } />
+                <button type="submit" class="col-md-2 btn btn-primary" id="shrink-button">shrink me</button >
+              
             </div>
           </form>
         </div>
