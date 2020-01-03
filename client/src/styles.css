@@ -5,7 +5,7 @@
 }
 
 .parallax {
-	//background-image: url("");
+	background-image: url("./static/astronaut.jpg");
 	background-attachment: fixed;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -20,6 +20,11 @@
 
 #navigation-menu-container {
 	width: 100%;
+}
+
+.nav-link {
+	font-size: 1.3em;
+	margin-left: 1.2em;
 }
 
 #shrink-container {
@@ -38,7 +43,12 @@
 }
 
 #shrink-section-heading {
+	width: 50%;
+	margin: 0 auto;
+	margin-bottom: 0.8em;
 	color: white;
+	background-color: rgba(0,0,0,0);
+	border-radius: 0.5em;
 }
 
 #shrink-form {
