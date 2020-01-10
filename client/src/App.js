@@ -252,7 +252,7 @@ class Item extends Component {
     const urlObj = this.props.urlObj;
     const longUrl = urlObj.long_url;
     const shortUrl = urlObj.short_url;
-    const fullShortUrl = process.env.baseURL + shortUrl;
+    const fullShortUrl = window.location.hostname + '/' + shortUrl;
 
     return(
       <div className="container-fluid list-group-item list-group-item-action">
