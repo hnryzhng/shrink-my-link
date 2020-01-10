@@ -21,7 +21,7 @@ class App extends Component {
           <Contact />
 
           <Switch>
-            <Route exact path="/:shorturl" component={RedirectComp} />
+            <Route exact path="/:shorturl" component={RedirectComponent} />
           </Switch>
 
         </div>
@@ -32,16 +32,16 @@ class App extends Component {
 
 }
 
-class RedirectComp extends Component {
+class RedirectComponent extends Component {
   
 
-  getLongUrl = () => {
+  red = () => {
 
     const baseURL = process.env.baseURL || "http://localhost:3001";
 
     const s = this.props.match.params.shorturl;
 
-    axios.get(`${baseURL}/api/shorturl`, {
+    axios.get(`${baseURL}/api/redirect`, {
         params: {
           shorturl: s
         }
@@ -50,8 +50,8 @@ class RedirectComp extends Component {
       .then(data => {
         if (data.success) {
           const longUrl = data.longurl;
-          window.location.href = longUrl; // validator to check if url has https://, if not, prepend https://
           console.log('long url:', longUrl);
+          window.location.href = longUrl; 
         } else {
           console.log('url could not be fetch from backend');
         }        
@@ -60,17 +60,9 @@ class RedirectComp extends Component {
 
   }
 
-  testfunction = () => { 
-    // window.location.href = "https://" + this.props.match.params.shorturl;
-  }
-
   render(){
 
-    console.log(this.props.match.params.shorturl);
-  
-    //this.testfunction();
-
-    this.getLongUrl();
+    this.red();
 
     return(
 
@@ -150,12 +142,27 @@ class ShrinkModule extends Component {
     links: [] // [{long_url: "", full_short_url: ""}, ...]
   }
 
+  validateUrl = (url) => {
+    // check if url has https://, if not, prepend
+    if (url.trim().substr(0,8) === "https://") {
+      return url
+    } else {
+      console.log("url must have 'https://' in the beginning");
+      return false
+    }
+
+  }
+
   sendUrl = (event) => {
     event.preventDefault();
 
     const urlInput = this.state.urlInput;
     console.log("state urlInput:", this.state.urlInput);
-    
+
+    if (this.validateUrl(urlInput) === false) {
+      return
+    }
+
     const baseURL = process.env.baseURL || "http://localhost:3001";     
 
     axios.post(`${baseURL}/api/shrink`, {

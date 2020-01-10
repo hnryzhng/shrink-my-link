@@ -128,7 +128,7 @@ router.post("/shrink", (req, res) => {
 // @desc Redirect to long url 
 // @access Public
 
-router.get("/shorturl", (req, res) => {
+router.get("/redirect", (req, res) => {
 	// retrieve short url and redirect if in db
 	
 	// TASK
@@ -150,14 +150,12 @@ router.get("/shorturl", (req, res) => {
 				error: "Url could not be found"
 			})
 		} else {
-			const fullLongUrl = "https://" + urlDoc.long_url;
+			const fullLongUrl = urlDoc.long_url;
 			console.log("redirect route long url:", fullLongUrl);
 			res.json({
 				success: true,
 				longurl: fullLongUrl
 			})
-
-			//res.redirect(fullLongUrl);
 		}
 	})
 	

@@ -63,9 +63,9 @@ app.use("/api", require("./routes"));	// routes for api requests: root/api/<spec
 
 // REACT
 // references front-end React for use in Heroku deployment, instead of locally running front-end and back-end with $npm start 
-app.use(express.static(path.join(__dirname,"/../client/build")));	
+app.use(express.static(path.join(__dirname,"/../", "client", "build")));	
 app.get("*", (req, res) => {
-	res.sendFile(path.join(__dirname,"/../client/build/index.html"));
+	res.sendFile(path.join(__dirname,"/../", "client", "build", "index.html"));
 });
 
 
