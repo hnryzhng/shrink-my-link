@@ -94,7 +94,7 @@ router.post("/shrink", (req, res) => {
 				const responseObj = {
 					success: true,
 					long_url: longUrl,
-					full_short_url: req.protocol + '://' + req.hostname + '/' + shortUrl
+					short_url: shortUrl
 				}
 
 				res.json(responseObj);
@@ -108,7 +108,7 @@ router.post("/shrink", (req, res) => {
 			const responseObj = {
 				success: true,
 				long_url: urlDoc.long_url,
-				full_short_url: req.protocol + '://' + req.hostname + '/' + urlDoc.short_url
+				short_url: urlDoc.short_url
 			}
 
 			res.json(responseObj);

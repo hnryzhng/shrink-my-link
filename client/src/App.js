@@ -35,7 +35,7 @@ class App extends Component {
 class RedirectComponent extends Component {
   
 
-  red = () => {
+  redirect = () => {
 
     const baseURL = process.env.baseURL || "http://localhost:3001";
 
@@ -62,7 +62,7 @@ class RedirectComponent extends Component {
 
   render(){
 
-    this.red();
+    this.redirect();
 
     return(
 
@@ -139,7 +139,7 @@ class ShrinkModule extends Component {
 
   state = {
     urlInput: null,
-    links: [] // [{long_url: "", full_short_url: ""}, ...]
+    links: [] // [{long_url: "", short_url: ""}, ...]
   }
 
   validateUrl = (url) => {
@@ -173,7 +173,7 @@ class ShrinkModule extends Component {
             if (data.success) {
               // add long and short urls from response to links array
               console.log("response data:", data);
-              this.setState( { links: [...this.state.links, {long_url: data.long_url, full_short_url: data.full_short_url}] } );
+              this.setState( { links: [...this.state.links, {long_url: data.long_url, short_url: data.short_url}] } );
             } else {      
               console.log("could not shrink your link");
             }
@@ -251,15 +251,16 @@ class Item extends Component {
 
     const urlObj = this.props.urlObj;
     const longUrl = urlObj.long_url;
-    const fullShortUrl = urlObj.full_short_url;
+    const shortUrl = urlObj.short_url;
+    const fullShortUrl = process.env.baseURL + shortUrl;
 
     return(
       <div className="container-fluid list-group-item list-group-item-action">
         <div className="row">
 
-          <li long-url={ longUrl } full-short-url={ fullShortUrl } ></li> 
+          <li long-url={ longUrl } short-url={ shortUrl } ></li> 
           <div className="col-md-6 long-url"> { longUrl } </div>
-          <div className="col-md-3 full-short-url"> {fullShortUrl} </div>
+          <div className="col-md-3 short-url"> {fullShortUrl} </div>
 
         <button type="button" className="col-md-3">COPY</button>
 
