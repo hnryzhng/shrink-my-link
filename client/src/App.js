@@ -247,6 +247,14 @@ class Item extends Component {
   // TASK: limit to 3 links per IP address
   // TASK: if long url length too long, limit display in overflow
 
+
+  copyLink = () => {
+
+
+
+  }
+
+
   render() {
 
     const urlObj = this.props.urlObj;
@@ -262,7 +270,7 @@ class Item extends Component {
           <div className="col-md-6 long-url"> { longUrl } </div>
           <div className="col-md-3 short-url"> {fullShortUrl} </div>
 
-        <button type="button" className="col-md-3">COPY</button>
+        <button type="button" className="col-md-3" onClick={this.copyLink} >COPY</button>
 
         </div>
       </div>
