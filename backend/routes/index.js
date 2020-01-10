@@ -128,7 +128,7 @@ router.post("/shrink", (req, res) => {
 // @desc Redirect to long url 
 // @access Public
 
-router.get("/convert/:shorturl", (req, res) => {
+router.get("/shorturl", (req, res) => {
 	// retrieve short url and redirect if in db
 	
 	// TASK
@@ -138,7 +138,7 @@ router.get("/convert/:shorturl", (req, res) => {
 
 	// troubleshoot "redirect with react js express js"
 
-	const shortUrl = req.params.shorturl;
+	const shortUrl = req.query.shorturl;
 	
 	console.log("redirect route short url param:", shortUrl);
 	
@@ -152,7 +152,12 @@ router.get("/convert/:shorturl", (req, res) => {
 		} else {
 			const fullLongUrl = "https://" + urlDoc.long_url;
 			console.log("redirect route long url:", fullLongUrl);
-			res.redirect(fullLongUrl);
+			res.json({
+				success: true,
+				longurl: fullLongUrl
+			})
+
+			//res.redirect(fullLongUrl);
 		}
 	})
 	

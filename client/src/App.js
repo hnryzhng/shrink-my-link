@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import "./styles.css";
 
@@ -7,22 +8,80 @@ class App extends Component {
   render() {
     
     return (
+      <Router>
 
-      <div>
+        <div>
 
-        <NaviBar />
-        
-        <ShrinkModule />
-        
-        <ProjectInfo />
-        
-        <Contact />
-        
-      </div>
+          <NaviBar />
+          
+          <ShrinkModule />
+          
+          <ProjectInfo />
+          
+          <Contact />
+
+          <Switch>
+            <Route exact path="/:shorturl" component={RedirectComp} />
+          </Switch>
+
+        </div>
+
+      </Router>
     );
   }
 
 }
+
+class RedirectComp extends Component {
+  
+
+  getLongUrl = () => {
+
+    const baseURL = process.env.baseURL || "http://localhost:3001";
+
+    const s = this.props.match.params.shorturl;
+
+    axios.get(`${baseURL}/api/shorturl`, {
+        params: {
+          shorturl: s
+        }
+      })
+      .then(response => response.data)
+      .then(data => {
+        if (data.success) {
+          const longUrl = data.longurl;
+          window.location.href = longUrl; // validator to check if url has https://, if not, prepend https://
+          console.log('long url:', longUrl);
+        } else {
+          console.log('url could not be fetch from backend');
+        }        
+      })
+      .catch("error", console.log("could not redirect"));
+
+  }
+
+  testfunction = () => { 
+    // window.location.href = "https://" + this.props.match.params.shorturl;
+  }
+
+  render(){
+
+    console.log(this.props.match.params.shorturl);
+  
+    //this.testfunction();
+
+    this.getLongUrl();
+
+    return(
+
+      <>
+      </>
+
+    )
+
+  }
+}
+
 
 class NaviBar extends Component {
 
