@@ -247,10 +247,22 @@ class Item extends Component {
   // TASK: limit to 3 links per IP address
   // TASK: if long url length too long, limit display in overflow
 
+  constructor(props) {
+
+    // TASK BOOKMARK
+    // CREATE TEXTAREA ELEMENT, COPY FROM IT, THEN REMOVE NODE
+    // https://learn.co/lessons/react-create-element
+
+    super(props);
+
+    this.textAreaRef = React.createRef();
+
+  }
 
   copyLink = () => {
 
-
+    this.textAreaRef.current.select();
+    document.execCommand('copy');
 
   }
 
@@ -268,9 +280,13 @@ class Item extends Component {
 
           <li long-url={ longUrl } short-url={ shortUrl } ></li> 
           <div className="col-md-6 long-url"> { longUrl } </div>
-          <div className="col-md-3 short-url"> {fullShortUrl} </div>
+          <div className="col-md-3 full-short-url"> {fullShortUrl} </div>
 
-        <button type="button" className="col-md-3" onClick={this.copyLink} >COPY</button>
+          <button type="button" className="col-md-3" onClick={this.copyLink} >COPY</button>
+          
+          <form>
+            <textarea className="col-md-3" ref={this.textAreaRef} value={fullShortUrl} />
+          </form>
 
         </div>
       </div>
