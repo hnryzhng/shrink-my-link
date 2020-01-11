@@ -37,7 +37,9 @@ class RedirectComponent extends Component {
 
   redirect = () => {
 
-    const baseURL = process.env.baseURL || "http://localhost:3001";
+    const production = "https://shrink-my-link.herokuapp.com";
+    const development = "http://localhost:3001";
+    const baseURL = (process.env.NODE_ENV? production : development);
 
     const s = this.props.match.params.shorturl;
 
@@ -163,7 +165,9 @@ class ShrinkModule extends Component {
       return
     }
 
-    const baseURL = process.env.baseURL || "http://localhost:3001";     
+    const production = "https://shrink-my-link.herokuapp.com";
+    const development = "http://localhost:3001";
+    const baseURL = (process.env.NODE_ENV? production : development);
 
     axios.post(`${baseURL}/api/shrink`, {
             longUrl: urlInput
