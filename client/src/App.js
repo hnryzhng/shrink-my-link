@@ -263,10 +263,16 @@ class Item extends Component {
 
   }
 
-  copyLink = () => {
+  copyLink = (fullShortUrl) => {
 
-    this.textAreaRef.current.select();
-    document.execCommand('copy');
+    var dummy = document.createElement('input');  // create dummy input element
+    document.body.appendChild(dummy); // append element to DOM
+    dummy.setAttribute('value', fullShortUrl);  // set element value to url
+
+    dummy.select(); // select input element
+    document.execCommand('copy'); // copy value from selected input element
+    
+    document.body.removeChild(dummy); // remove input element from body
 
   }
 
@@ -286,11 +292,8 @@ class Item extends Component {
           <div className="col-md-6 long-url"> { longUrl } </div>
           <div className="col-md-3 full-short-url"> {fullShortUrl} </div>
 
-          <button type="button" className="col-md-3" onClick={this.copyLink} >COPY</button>
+          <button type="button" className="col-md-3" onClick={this.copyLink(fullShortUrl)} >COPY</button>
           
-          <form>
-            <textarea className="col-md-3" ref={this.textAreaRef} value={fullShortUrl} />
-          </form>
 
         </div>
       </div>
