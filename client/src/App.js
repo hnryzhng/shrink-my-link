@@ -141,7 +141,8 @@ class ShrinkModule extends Component {
 
   state = {
     urlInput: null,
-    links: [] // [{long_url: "", short_url: ""}, ...]
+    links: [], // [{long_url: "", short_url: ""}, ...]
+    errorMessage: ""
   }
 
   validateUrl = (url) => {
@@ -150,6 +151,7 @@ class ShrinkModule extends Component {
       return url
     } else {
       console.log("url must have 'https://' in the beginning");
+      this.setState({ errorMessage: "url must have 'https://' in the beginning" }, () => { alert(this.state.errorMessage) })      
       return false
     }
 
@@ -253,10 +255,6 @@ class Item extends Component {
 
   constructor(props) {
 
-    // TASK BOOKMARK
-    // CREATE TEXTAREA ELEMENT, COPY FROM IT, THEN REMOVE NODE
-    // https://learn.co/lessons/react-create-element
-
     super(props);
 
     this.textAreaRef = React.createRef();
@@ -292,7 +290,7 @@ class Item extends Component {
           <div className="col-md-6 long-url"> { longUrl } </div>
           <div className="col-md-3 full-short-url"> {fullShortUrl} </div>
 
-          <button type="button" className="col-md-3" onClick={this.copyLink(fullShortUrl)} >COPY</button>
+          <button type="button" className="copy-button col-md-3 btn btn-success" onClick={this.copyLink(fullShortUrl)} >COPY</button>
           
 
         </div>
@@ -350,8 +348,8 @@ class Contact extends Component {
               <div className="container-fluid">
                   <ul className="list-unstyled" id="personal-links">
                     
-                    <li><button type="button" className="btn btn-primary" href="https://www.github.com/hnryzhng">GitHub</button></li>
-                    <li><button type="button" className="btn btn-primary" href="https://www.linkedin.com/in/hnryzhng">LinkedIn</button></li>
+                    <li><a className="btn btn-primary" href="https://www.github.com/hnryzhng" role="button">GitHub</a></li>
+                    <li><a className="btn btn-primary" href="https://www.linkedin.com/in/hnryzhng" role="button">LinkedIn</a></li>
                   
                   </ul>
               </div>
