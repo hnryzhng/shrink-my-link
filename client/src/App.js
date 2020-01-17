@@ -150,8 +150,8 @@ class ShrinkModule extends Component {
     if (url.trim().substr(0,8) === "https://") {
       return url
     } else {
-      console.log("url must have 'https://' in the beginning");
-      this.setState({ errorMessage: "url must have 'https://' in the beginning" }, () => { alert(this.state.errorMessage) })      
+      console.log("please put in a working url that has 'https://' in the beginning");
+      this.setState({ errorMessage: "please put in a working url that has 'https://' in the beginning" }, () => { alert(this.state.errorMessage) })      
       return false
     }
 
@@ -315,12 +315,12 @@ class ProjectInfo extends Component {
           <img className="d-flex justify-content-center" id="project-info-icon" src={ require('./static/icons/barchart.png')} alt="" /> 
         
 
-          <span id="project-info-content">
+          <div id="project-info-content">
             <p>
               This is a demo project built using React.js and Node.js.
               If you want to see more of my work, please check out my GitHub page given below. 
             </p>
-          </span>
+          </div>
 
         </div>
       </section>
