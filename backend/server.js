@@ -13,7 +13,7 @@ const Urls = require(path.join(__dirname, "/models/urls.js"));
 const Counter = require(path.join(__dirname, "/models/counter.js"));
 
 const Shrinker = require(path.join(__dirname, "/shrinker.js"));
-const pingHeroku = require(path.join(__dirname, '/ping-heroku.js'));
+// const pingHeroku = require(path.join(__dirname, '/ping-heroku.js'));
 
 // INSTANTIATE APP 
 const app = express();
