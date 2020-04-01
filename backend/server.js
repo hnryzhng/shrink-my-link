@@ -13,7 +13,6 @@ const Urls = require(path.join(__dirname, "/models/urls.js"));
 const Counter = require(path.join(__dirname, "/models/counter.js"));
 
 const Shrinker = require(path.join(__dirname, "/shrinker.js"));
-// const pingHeroku = require(path.join(__dirname, '/ping-heroku.js'));
 
 // INSTANTIATE APP 
 const app = express();
@@ -25,7 +24,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // HEROKU
-pingHeroku("https://shrink-my-link.herokuapp.com/", 1799000); // pings every 1799 seconds, or almost 30 min (1800 sec)
+// const pingHeroku = require(path.join(__dirname, '/ping-heroku.js'));
+// pingHeroku("https://shrink-my-link.herokuapp.com/", 1799000); // pings every 1799 seconds, or almost 30 min (1800 sec)
 
 // DATABASE 
 const dbRoute = process.env.MONGOLAB_URI;
