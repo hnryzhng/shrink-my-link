@@ -28,17 +28,17 @@ app.use(cors());
 // pingHeroku("https://shrink-my-link.herokuapp.com/", 1799000); // pings every 1799 seconds, or almost 30 min (1800 sec)
 
 // DATABASE 
-const dbRoute = process.env.MONGOLAB_URI;
-console.log("db route:", dbRoute);
-mongoose
-	.connect(
-		dbRoute,
-		{	useNewUrlParser: true,
-			useUnifiedTopology: true	// this mongoose version requires this parameter
-		},
-	)
-	.then(() => console.log("connected to MongoDB database"))
-	.catch((err) => console.log("error connecting to MongoDB:", err));
+// const dbRoute = process.env.MONGOLAB_URI;
+// console.log("db route:", dbRoute);
+// mongoose
+// 	.connect(
+// 		dbRoute,
+// 		{	useNewUrlParser: true,
+// 			useUnifiedTopology: true	// this mongoose version requires this parameter
+// 		},
+// 	)
+// 	.then(() => console.log("connected to MongoDB database"))
+// 	.catch((err) => console.log("error connecting to MongoDB:", err));
 
 // TASK
 // Testing React components: refer to test files for docs
